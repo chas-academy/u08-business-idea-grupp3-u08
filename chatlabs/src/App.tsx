@@ -2,6 +2,8 @@ import Lottie from "react-lottie-player";
 import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import StepsComponent from "./components/StepsComponent";
+import Steps from "./components/Steps";
 function App() {
   return (
     <>
@@ -129,6 +131,7 @@ function App() {
           </div>
         </section>
       </section>
+      <Steps />
       <Footer />
     </>
   );
