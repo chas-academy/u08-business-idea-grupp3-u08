@@ -5,6 +5,7 @@ function NavBar() {
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
+
   return (
     <nav className="border-gray-200 bg-neutral-900 p-3">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">

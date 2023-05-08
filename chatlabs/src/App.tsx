@@ -28,6 +28,9 @@ function App() {
               />
               <img
                 className="h-full w-full object-cover rounded-xl absolute top-0 left-0"
+            <div className="hidden sm:block relative h-96">
+              <img
+                className="h-full w-full object-cover rounded-xl"
                 src="https://image.lexica.art/full_jpg/a868d5f3-410e-4102-a1c2-a240306eae0f"
                 alt=""
               />
@@ -82,6 +85,9 @@ function App() {
               <div className="h-full w-7/12 object-cover rounded-xl md:order-2 sm:w-1/2 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
                 <img
                   className="rounded-xl "
+              <div className="h-full w-7/12 object-cover rounded-xl md:order-2 sm:w-1/2">
+                <img
+                  className="rounded-xl"
                   src="https://image.lexica.art/full_jpg/985c586b-8dc0-4031-9894-51fdfa775dbf"
                   alt=""
                 />
@@ -97,6 +103,9 @@ function App() {
               <div className="h-full w-7/12 object-cover rounded-xl md:order-1 sm:w-1/2 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300">
                 <img
                   className="rounded-xl "
+              <div className="h-full w-7/12 object-cover rounded-xl md:order-1 sm:w-1/2">
+                <img
+                  className="rounded-xl"
                   src="https://image.lexica.art/full_jpg/ac0efe10-c183-474b-90ef-2d03446dc355"
                   alt=""
                 />
