@@ -65,7 +65,7 @@ function Steps() {
             </li>
           ))}
         </ol>
-      </nav>
+      </nav> 
       <div className='flex flex-col justify-center items-center'>
         <h2 className='text-slate-100 text-2xl pb-5 md:px-0 max-w-96 sm:w-96'> {steps[activeStep].text} </h2>
         <img className='w-96 rounded-xl' src={steps[activeStep].image} alt="" />
