@@ -2,12 +2,12 @@ import Lottie from "react-lottie-player";
 import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import StepsComponent from "./components/StepsComponent";
 import Steps from "./components/Steps";
 function App() {
   return (
     <>
       <NavBar />
+
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="my-20 flex flex-row md:flex-row justify-center">
