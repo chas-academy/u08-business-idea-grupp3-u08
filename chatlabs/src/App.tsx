@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <NavBar />
+
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="my-20 flex flex-row md:flex-row justify-center">
