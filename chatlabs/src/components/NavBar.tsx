@@ -1,4 +1,11 @@
+import { useState } from "react";
 function NavBar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function toggleMenu() {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
     <nav className="border-gray-200 bg-neutral-900 p-3">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
@@ -13,11 +20,10 @@ function NavBar() {
           </span>
         </a>
         <button
-          data-collapse-toggle="navbar-solid-bg"
+          onClick={toggleMenu}
           type="button"
-          className="inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 -gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-solid-bg"
-          aria-expanded="false"
+          className="inline-flex items-center p-2 ml-3 text-sm text-violet-500 rounded-lg md:hidden hover:bg-neutral-600"
+          aria-expanded={isMenuOpen}
         >
           <span className="sr-only">Open main menu</span>
           <svg
@@ -34,8 +40,14 @@ function NavBar() {
             ></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-          <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+        <div
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } w-full md:block md:w-auto`}
+          id="navbar-solid-bg"
+        >
+          <ul className="flex flex-col font-medium mt-4 rounded-lg bg-neutral-950 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+            {" "}
             <li>
               <a
                 href="#"
