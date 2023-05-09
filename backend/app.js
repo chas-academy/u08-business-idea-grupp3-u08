@@ -1,4 +1,5 @@
-const { MongoClient, Collection } = require('mongodb');
+
+const { MongoClient } = require('mongodb');
 
 async function main() {
 
@@ -38,5 +39,7 @@ async function createListing(client, newListing) {
   const res = await client.db("Chatlabs").collection("characters").insertOne(newListing);
   console.log(`new listiting added with id of ${res.insertedId}`);
 }
+
+
 main().catch(console.error) //error handling 
 
