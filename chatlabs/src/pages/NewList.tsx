@@ -1,35 +1,31 @@
 function NewList() {
   return (
     <>
-      {/* <section className="flex justify-center ">
-        <div className="w-2/3 md:max-w-2xl">
-          <section className="my-10 flex flex-row md:flex-row justify-center">
-            <div className="flex flex-col justify-center">
-              <h1 className="text-slate-100 text-3xl font-bold uppercase">
-                <span className="text-violet-500">Character</span> Lists
+      <section className="flex justify-center bg-neutral-950">
+        <div className="w-full h-full md:max-w-2xl">
+          <section className="flex flex-row justify-center my-20 md:flex-row">
+            <div className="flex flex-col justify-center mr-32">
+              <h1 className="text-6xl font-light uppercase text-slate-100 ">
+                <span className="text-violet-500">Dash</span>Board
               </h1>
-              <nav
-                aria-roledescription="listMenu"
-                className="text-slate-100 text-sm md:text-md uppercase font-bold bg-neutral-500"
-              >
-                {" "}
-                <a href="#" className="px-8">
-                  Name
-                </a>
-                <a href="#" className="px-8">
-                  Description
-                </a>
-                <a href="#" className="px-8">
-                  Characters
-                </a>
-                <a href="#" className="px-8">
-                  Created
-                </a>
-              </nav>
             </div>
           </section>
         </div>
-      </section> */}
+      </section>
+
+      <div className="relative w-full">
+        <svg
+          className="absolute inset-0 z-10 w-full -translate-y-12"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
+          <path
+            fill="#0a0a0a"
+            fill-opacity="1"
+            d="M0,128L1440,64L1440,0L0,0Z"
+          ></path>
+        </svg>
+      </div>
       <section className="flex justify-center w-full px-4">
         <div className="flex flex-col w-full justify-center">
           <div className="my-10 flex flex-row md:flex-row justify-center">
