@@ -3,6 +3,7 @@ import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Steps from "./components/Steps";
+import NewList from "./components/NewList";
 function App() {
   return (
     <>
@@ -131,6 +132,7 @@ function App() {
           </div>
         </section>
       </section>
+      <NewList />
       <Steps />
       <Footer />
     </>

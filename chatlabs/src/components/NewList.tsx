@@ -1,37 +1,8 @@
 function NewList() {
   return (
     <>
-      {/* <section className="flex justify-center ">
-        <div className="w-2/3 md:max-w-2xl">
-          <section className="my-10 flex flex-row md:flex-row justify-center">
-            <div className="flex flex-col justify-center">
-              <h1 className="text-slate-100 text-3xl font-bold uppercase">
-                <span className="text-violet-500">Character</span> Lists
-              </h1>
-              <nav
-                aria-roledescription="listMenu"
-                className="text-slate-100 text-sm md:text-md uppercase font-bold bg-neutral-500"
-              >
-                {" "}
-                <a href="#" className="px-8">
-                  Name
-                </a>
-                <a href="#" className="px-8">
-                  Description
-                </a>
-                <a href="#" className="px-8">
-                  Characters
-                </a>
-                <a href="#" className="px-8">
-                  Created
-                </a>
-              </nav>
-            </div>
-          </section>
-        </div>
-      </section> */}
-      <section className="flex justify-center w-full px-4">
-        <div className="flex flex-col w-full justify-center">
+      <section className="flex justify-center px-4">
+        <div className="flex flex-col justify-center">
           <div className="my-10 flex flex-row md:flex-row justify-center">
             <h1 className="text-slate-100 text-2xl md:text-3xl font-bold uppercase">
               <span className="text-violet-500">Character</span> Lists
@@ -69,11 +40,11 @@ function NewList() {
               </a>
             </nav>
           </div>
-          <div className="flex flex-col bg-neutral-500 p-4 rounded-xl w-full">
-            <div className="flex flex-row bg-neutral-950 text-neutral-100">
-              <h3 className="list-none font-semibold">Bla bla</h3>
-              <p>Lorem ipsum si dolor amet...</p>
-              <p>yyyy-mm-dd</p>
+          <div className="flex flex-col bg-neutral-500 py-4 px-4 rounded-xl max-w-screen-lg">
+            <div className="flex flex-row bg-neutral-950 text-neutral-100 p-2">
+              <h3 className="font-semibold text-sm px-2">Bla bla</h3>
+              <p className="px-2 text-sm">Lorem ipsum si dolor amet...</p>
+              <p className="pr-8 text-sm">yyyy-mm-dd</p>
               <button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
