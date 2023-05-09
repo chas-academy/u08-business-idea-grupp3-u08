@@ -26,7 +26,8 @@ function NewList() {
           ></path>
         </svg>
       </div>
-      <section className="flex justify-center w-full px-4">
+
+      <section className="flex justify-center pt-10 mt-16 mx-3">
         <div className="flex flex-col w-full justify-center">
           <div className="my-10 flex flex-row md:flex-row justify-center">
             <h1 className="text-slate-100 text-2xl md:text-3xl font-bold uppercase">
@@ -66,11 +67,11 @@ function NewList() {
             </nav>
           </div>
           <div className="flex flex-col bg-neutral-500 p-4 rounded-xl w-full">
-            <div className="flex flex-row bg-neutral-950 text-neutral-100">
-              <h3 className="list-none font-semibold">Bla bla</h3>
-              <p>Lorem ipsum si dolor amet...</p>
-              <p>yyyy-mm-dd</p>
-              <button>
+            <div className="flex flex-row items-center justify-center bg-neutral-950 text-neutral-100 py-2">
+              <h3 className="list-none font-semibold px-2">Bla bla</h3>
+              <p className="px-2">Lorem ipsum si dolor amet...</p>
+              <p className="px-2">yyyy-mm-dd</p>
+              <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -86,7 +87,7 @@ function NewList() {
                   />
                 </svg>
               </button>
-              <button>
+              <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -102,7 +103,7 @@ function NewList() {
                   />
                 </svg>
               </button>
-              <button>
+              <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
