@@ -2,7 +2,7 @@
 function DashBoard2() {
   return (
     <>
-      
+
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="my-20 flex flex-row md:flex-row justify-center">
@@ -28,34 +28,46 @@ function DashBoard2() {
           ></path>
         </svg>
       </div>
-      
+      {/* 
+     
+      {/* Forms*/}
       <div className="flex justify-center mt-20 pt-10">
-        <div className="h-80 w-96 bg-black rounded-lg shadow-lg p-6">
-          <h2 className="text-xl text-violet-500 justify-center font-semibold mb-4 uppercase">Create Character</h2>
-          {/* Forms*/}
-          <form>
-            <div className="mb-4">  
-              
-            </div>
-            
-            {/* Cancel och Submit knapppar*/}
-            <div className="flex justify-end ">
-              <button
-               
-              >
-              </button>
-              <button>
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+          <form className=" bg-black rounded-lg shadow-lg p-10">
+            <h2 className="text-xl text-violet-500 font-semibold mb-20 mt-8 uppercase text-center">Create Character</h2>
 
-
-              </button>
-             
+            {/* Input fält start*/}
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Name
+              </label>
+              <input className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="" />
             </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Backstory
+              </label>
+              <input className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-20" id="username" type="text" placeholder="" />
+            </div>
+            {/* Input fält Stop*/}
+
+            {/* button start */}
+            <div className="flex items-center justify-between">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10" type="button">
+                SUBMIT
+              </button>
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10" type="button">
+                CANCEL
+              </button>
+            </div>
+            {/* button end */}
+
           </form>
         </div>
       </div>
     </>
   );
 }
-   
+
 
 export default DashBoard2;
