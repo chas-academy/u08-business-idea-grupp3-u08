@@ -1,14 +1,39 @@
 import Lottie from "react-lottie-player";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Steps from "./components/Steps";
-import NewList from "./components/NewList";
+import DashBoard2 from "./pages/db-2";
+import DashBoard4 from "./pages/db-4";
+
 function App() {
   return (
-    <>
-      <NavBar />
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard2" element={<DashBoard2 />} />
+          <Route path="/dashboard4" element={<DashBoard4 />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
+function NotFound() {
+  return (
+    <section className="flex justify-center font-bold text-violet-500">
+      <h1>404 - Page Not Found</h1>
+    </section>
+  );
+}
+
+function Home() {
+  return (
+    <>
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="my-20 flex flex-row md:flex-row justify-center">
@@ -132,7 +157,6 @@ function App() {
           </div>
         </section>
       </section>
-      <NewList />
       <Steps />
       <Footer />
     </>
