@@ -1,13 +1,12 @@
-
 function DashBoard2() {
   return (
     <>
       
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
-          <section className="my-20 flex flex-row md:flex-row justify-center">
+          <section className="flex flex-row justify-center my-20 md:flex-row">
             <div className="flex flex-col justify-center mr-32">
-              <h1 className="text-slate-100 text-6xl font-light uppercase ">
+              <h1 className="text-6xl font-light uppercase text-slate-100 ">
                 <span className="text-violet-500">Dash</span>Board
               </h1>
             </div>
@@ -17,7 +16,7 @@ function DashBoard2() {
 
       <div className="relative w-full">
         <svg
-          className="w-full inset-0 absolute z-10 -translate-y-12"
+          className="absolute inset-0 z-10 w-full -translate-y-12"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -29,9 +28,9 @@ function DashBoard2() {
         </svg>
       </div>
       
-      <div className="flex justify-center mt-20 pt-10">
-        <div className="h-80 w-96 bg-black rounded-lg shadow-lg p-6">
-          <h2 className="text-xl text-violet-500 justify-center font-semibold mb-4 uppercase">Create Character</h2>
+      <div className="flex justify-center pt-10 mt-20">
+        <div className="p-6 bg-black rounded-lg shadow-lg h-80 w-96">
+          <h2 className="justify-center mb-4 text-xl font-semibold uppercase text-violet-500">Create Character</h2>
           {/* Forms*/}
           <form>
             <div className="mb-4">  
