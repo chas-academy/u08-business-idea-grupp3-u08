@@ -8,9 +8,9 @@ function NavBar() {
     setIsMenuOpen(!isMenuOpen);
   }
   return (
-    <nav className="border-gray-200 bg-neutral-900 p-3">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
-      <Link to="/" className="flex items-center">
+    <nav className="p-3 border-gray-200 bg-neutral-900">
+      <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
+        <Link to="/" className="flex items-center">
           <img
             src="../../public/logo.png"
             className="h-10"
