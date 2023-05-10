@@ -5,22 +5,23 @@ const usersSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Characters: {
-        name: {
-            type: String,
-            required: true
-        },
-        backstory: {
-            type: String,
-            required: true,
-        },
-        traits: {
-            type: String,
-            required: true
+    Characters: [
+        {
+            name: {
+                type: String,
+                required: true
+            },
+            backstory: {
+                type: String,
+                required: true,
+            },
+            traits: {
+                type: String,
+                required: true
+            }
         }
-    }
+    ]
 });
 
 // Export model
 module.exports = mongoose.model("User", usersSchema);
-

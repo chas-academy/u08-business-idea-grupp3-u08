@@ -33,15 +33,37 @@ app.use(express.json());
 // parse url encoded objects- data sent through the url
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/create", async (req, res) => {
+app.put("/create/:id", async (req, res) => {
+  try {
+    const { name, backstory, traits } = req.body;
+    const user = await User.updateOne(
+      { _id: req.params.id },
+      { $push: { Characters: { name, backstory, traits } } }
+    );
+    if (user.nModified === 0) {
+      throw new Error("User not found");
+    }
+    res.status(200).json({
+      message: "Character added to user",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+  
+
+app.post("/createuser", async (req, res) => {
     //check if req.body is empty
     if (!Object.keys(req.body).length) {
         res.status(400).json({
             message: "Request body cannot be empty",
         });
     }
-    const { email, Characters} = req.body;
-    const character = await create({email, Characters });
+    const { email } = req.body;
+    const character = await create({email});
 
     if (character.error) {
         res.status(500).json({
@@ -55,61 +77,23 @@ app.post("/create", async (req, res) => {
     }
 });
 
-// app.get("/characters", async (req, res) => {
-//     const characters = await readAll();
+app.get("/characters", async (req, res) => {
+    const characters = await readAll();
 
-//     if (books.error) {
-//         res.status(500).json({
-//             message: error.message,
-//             books: books.data,
-//         });
-//     }
-//     else {
-//         res.status(200).json({
-//             message: "success",
-//             books: books.data,
-//         });
-//     }
-// });
+    if (characters.error) {
+        res.status(500).json({
+            message: error.message,
+            characters: characters.data,
+        });
+    }
+    else {
+        res.status(200).json({
+            message: "success",
+            characters: characters.data,
+        });
+    }
+});
 
-// app.get("/charprofile/:CharID", async (req, res) => {
-//     const char1 = await read(req.params.CharID);
-//     if (character.error) {
-//         res.status(500).json({
-//             message: character.error,
-//             character: character.data,
-//         });
-//     }
-//     else {
-//         res.status(200).json({
-//             message: "success",
-//             character: character.data,
-//         });
-//     }
-// });
-
-// app.put("/books/:bookID", async (req, res) => {
-//     if (!Object.keys(req.body).length) {
-//         res.status(400).json({
-//             message: "Request body cannot be empty",
-//             book: null,
-//         });
-//     }
-
-//     const book = await update(req.params.bookID, req.body);
-//     if (book.error) {
-//         res.status(500).json({
-//             message: book.error,
-//             book: book.data,
-//         });
-//     }
-//     else {
-//         res.status(200).json({
-//             message: "success",
-//             book: book.data,
-//         });
-//     }
-// });
 
 // app.delete("/books/:bookID", async (req, res) => {
 //     const isDeleted = await deleteBook(req.params.bookID);
