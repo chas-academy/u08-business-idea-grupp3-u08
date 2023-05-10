@@ -33,7 +33,7 @@ function DashBoard2() {
       {/* Forms*/}
       <div className="flex justify-center mt-20 pt-10 ">
         <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl shadow-lg shadow-violet-500/50 hover:shadow-violet-500/100 transition duration-300">
-          <form className=" bg-black rounded-lg shadow-lg p-10">
+          <form className=" bg-black rounded-xl shadow-lg p-10">
             <h2 className="text-xl text-violet-500 font-semibold mb-20 mt-8 uppercase text-center">Create Character</h2>
 
             {/* Input fält start*/}
