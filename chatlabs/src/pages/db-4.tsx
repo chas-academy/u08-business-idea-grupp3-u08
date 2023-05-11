@@ -35,7 +35,7 @@ function DashBoard4() {
 
         {/*Card */}
       <div className="flex justify-center pt-5 px-96 m-36 ">
-      <div className="p-5 bg-black rounded-lg shadow-lg h-full  ">
+      <div className="p-5 bg-black rounded-lg  h-full shadow-lg shadow-violet-500/100  ">
           {/*Content */}
           <div className="pt-10 ">
           <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase ">Character Name</h1>
