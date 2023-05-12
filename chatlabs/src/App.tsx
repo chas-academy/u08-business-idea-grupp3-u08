@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
 import DashBoard2 from "./pages/db-2";
-import DashBoard4 from "./pages/db-4";
+import DashBoard4 from "./db-4";
 
 
 
