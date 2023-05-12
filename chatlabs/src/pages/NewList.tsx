@@ -28,13 +28,13 @@ function NewList() {
       </div>
 
       <section className="flex justify-center pt-10 mt-16 mx-3">
-        <div className="flex flex-col w-full justify-center">
+        <div className="flex flex-col w-3xl justify-center">
           <div className="my-10 flex flex-row md:flex-row justify-center">
             <h1 className="text-slate-100 text-2xl md:text-3xl font-bold uppercase">
               <span className="text-violet-500">Character</span> Lists
             </h1>
           </div>
-          <div className="flex flex-row border-b-2 border-neutral-100 my-2 justify-center">
+          <div className="flex flex-row border-b-2 border-neutral-100 my-2 justify-between">
             <nav
               aria-roledescription="listMenu"
               className="text-slate-100 text-sm md:text-md uppercase font-light md:font-bold"
@@ -44,9 +44,9 @@ function NewList() {
                 Name
               </a>
               <a href="#" className="px-2">
-                Description
+                Traits
               </a>
-              <a href="#" className="pr-8">
+              <a href="#" className="px-2">
                 Created
               </a>
             </nav>
@@ -69,7 +69,7 @@ function NewList() {
           <div className="flex flex-col bg-neutral-500 p-4 rounded-xl w-full">
             <div className="flex flex-row items-center justify-center bg-neutral-950 text-neutral-100 py-2">
               <h3 className="list-none font-semibold px-2">Bla bla</h3>
-              <p className="px-2">Lorem ipsum si dolor amet...</p>
+              <p className="px-2">Lorem ipsum</p>
               <p className="px-2">yyyy-mm-dd</p>
               <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
                 <svg

@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
+
 function DashBoard2() {
   return (
     <>
-      
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="flex flex-row justify-center my-20 md:flex-row">
@@ -27,34 +28,31 @@ function DashBoard2() {
           ></path>
         </svg>
       </div>
-      
+
       <div className="flex justify-center pt-10 mt-20">
         <div className="p-6 bg-black rounded-lg shadow-lg h-80 w-96">
-          <h2 className="justify-center mb-4 text-xl font-semibold uppercase text-violet-500">Create Character</h2>
+          <h2 className="justify-center mb-4 text-xl font-semibold uppercase text-violet-500">
+            Create Character
+          </h2>
           {/* Forms*/}
           <form>
-            <div className="mb-4">  
-              
-            </div>
-            
+            <div className="mb-4"></div>
+
             {/* Cancel och Submit knapppar*/}
             <div className="flex justify-end ">
-              <button
-               
-              >
-              </button>
-              <button>
-
-
-              </button>
-             
+              <button></button>
+              <button></button>
             </div>
           </form>
+        </div>
+      </div>
+      <div className="flex justify-center pt-10 mt-10 ">
+        <div className="bg-black text-slate-100 w-96 rounded-lg shadow-lg self-center text-center text-lg">
+          <Link to="/lists">See my characters</Link>
         </div>
       </div>
     </>
   );
 }
-   
 
 export default DashBoard2;
