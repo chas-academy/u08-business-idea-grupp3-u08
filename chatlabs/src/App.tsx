@@ -1,10 +1,39 @@
 import Lottie from "react-lottie-player";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import lottieJson from "../src/assets/lottie.json";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Steps from "./components/Steps";
+import DashBoard2 from "./pages/db-2";
+import DashBoard4 from "./pages/db-4";
+
 function App() {
   return (
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard2" element={<DashBoard2 />} />
+          <Route path="/dashboard4" element={<DashBoard4 />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+function NotFound() {
+  return (
+    <section className="flex justify-center font-bold text-violet-500">
+      <h1>404 - Page Not Found</h1>
+    </section>
+  );
+}
+
+function Home() {
+  return (
     <>
-      <NavBar />
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="my-20 flex flex-row md:flex-row justify-center">
@@ -17,9 +46,14 @@ function App() {
                 <span className="text-violet-500">life</span>
               </p>
             </div>
-            <div className="hidden sm:block relative h-96">
+            <div className="hidden sm:block relative h-96 ">
               <img
-                className="h-full w-full object-cover rounded-xl"
+                className="h-full w-full  animate-pulse object-cover shadow-lg  shadow-violet-500/100 transition duration-300 rounded-xl"
+                src="https://image.lexica.art/full_jpg/a868d5f3-410e-4102-a1c2-a240306eae0f"
+                alt=""
+              />
+              <img
+                className="h-full w-full object-cover rounded-xl absolute top-0 left-0"
                 src="https://image.lexica.art/full_jpg/a868d5f3-410e-4102-a1c2-a240306eae0f"
                 alt=""
               />
@@ -71,9 +105,9 @@ function App() {
                   that makes your game world feel alive.
                 </p>
               </div>
-              <div className="h-full w-7/12 object-cover rounded-xl md:order-2 sm:w-1/2">
+              <div className="h-full w-7/12 object-cover rounded-xl md:order-2 sm:w-1/2 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
                 <img
-                  className="rounded-xl"
+                  className="rounded-xl "
                   src="https://image.lexica.art/full_jpg/985c586b-8dc0-4031-9894-51fdfa775dbf"
                   alt=""
                 />
@@ -86,9 +120,9 @@ function App() {
         <section className="flex justify-center px-0 sm:px-5">
           <div className="w-full md:max-w-2xl">
             <div className="my-20 flex md:flex-row flex-col items-center">
-              <div className="h-full w-7/12 object-cover rounded-xl md:order-1 sm:w-1/2">
+              <div className="h-full w-7/12 object-cover rounded-xl md:order-1 sm:w-1/2 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300">
                 <img
-                  className="rounded-xl"
+                  className="rounded-xl "
                   src="https://image.lexica.art/full_jpg/ac0efe10-c183-474b-90ef-2d03446dc355"
                   alt=""
                 />
@@ -123,6 +157,8 @@ function App() {
           </div>
         </section>
       </section>
+      <Steps />
+      <Footer />
     </>
   );
 }
