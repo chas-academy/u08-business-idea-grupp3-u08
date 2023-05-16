@@ -1,11 +1,88 @@
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function NavBar() {
+  const [rerender, setRerender] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [userData, setUserData] = useState({})
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
+  function loginWithGithub(){
+  window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID)
+  console.log(CLIENT_ID)
+  }
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const codeParam = urlParams.get("code");
+    console.log(codeParam);
+    getUserData();
+    if (codeParam && localStorage.getItem("accessToken") === null) {
+      async function getAccessToken() {
+        await fetch("http://localhost:4000/getAccessToken?code=" + codeParam, {
+          method: "GET",
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.access_token) {
+              localStorage.setItem("accessToken", data.access_token);
+              setRerender(!rerender);
+            }
+          });
+      }
+      getAccessToken();
+    }
+    if (!localStorage.getItem("accessToken")) {
+      localStorage.removeItem("name");
+    }
+  }, [rerender]);
+  
+
+  async function getUserData() {
+    await fetch("http://localhost:4000/getUserData", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("name", data.login);
+        localStorage.setItem("id", data.id);
+        setUserData(data);
+        sendUserId()
+      });
+  }
+  
+  async function sendUserId() {
+    await fetch("http://localhost:4000/createuser", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: localStorage.getItem("id")}),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to create user');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data.message);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -73,6 +150,33 @@ function NavBar() {
                 Dashboard
               </Link>
             </li>
+            {localStorage.getItem("accessToken") ? 
+              <>
+                <button className='block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500' onClick={() => {
+                  localStorage.removeItem("accessToken")
+                  setRerender(!rerender)
+                  }}
+                >
+                  Log out
+                </button>
+                {Object.keys(userData).length !== 0 ?
+                  <>
+                  <h2 className='block py-2 pl-3 pr-4 text-white rounded'>Welcome {localStorage.getItem("name")}</h2>
+                  </>
+                  :
+                  <>
+                  </>
+                }
+              </>
+            :
+              <>
+              <li>
+                <button className='block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500' onClick={loginWithGithub}>
+                Login
+                </button>
+              </li>
+              </>
+            }
             </ul>
         </div>
       </div>

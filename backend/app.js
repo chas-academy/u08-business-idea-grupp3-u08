@@ -2,8 +2,13 @@ const express = require("express")
 const cors = require("cors")
 const app = express()
 const { create, readAll, read, update, deleteChar } = require("./userCRUD")
-
 const User = require("./userSchema")
+
+const CLIENT_ID = "252e6c426cbfb2206b35"
+const CLIENT_SECRET = "39793dc9261976717bc7ebc2ebf997ffe3099dbf"
+const fetch = (...args) =>
+    import("node-fetch").then(({default: fetch}) => fetch(...args))
+const bodyparser = require("body-parser")
 
 const user1 = User.find("email")
 // const char1 = user1.Characters[1]
@@ -32,6 +37,38 @@ app.use(cors());
 app.use(express.json());
 // parse url encoded objects- data sent through the url
 app.use(express.urlencoded({ extended: true }));
+
+//code from frontend
+app.get('/getAccessToken', async (req, res) => {
+    req.query.code
+    const params = "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&code=" + req.query.code
+    await fetch ("https://github.com/login/oauth/access_token" + params, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json"
+        }
+    }).then((response) =>{
+        return response.json()
+    }).then((data) => {
+        res.json(data)
+        console.log(data)
+    })
+})
+
+//getUserData
+app.get('/getUserData', async (req, res) => {
+    req.get("Authorization")
+    await fetch ("https://api.github.com/user", {
+        method: "GET",
+        headers: {
+            "Authorization" : req.get("Authorization")
+        }
+    }).then((response) =>{
+        return response.json()
+    }).then((data)=>{
+        res.json(data)
+    })
+})
 
 app.put("/create/:id", async (req, res) => {
     try {
@@ -94,27 +131,47 @@ app.put("/edit/:id/:charId", async (req, res) => {
     }
 });
 
-app.post("/createuser", async (req, res) => {
-    //check if req.body is empty
-    if (!Object.keys(req.body).length) {
-        res.status(400).json({
-            message: "Request body cannot be empty",
-        });
-    }
-    const { email } = req.body;
-    const character = await create({ email });
 
+app.post("/createuser", async (req, res) => {
+    // Check if req.body is empty
+    if (!Object.keys(req.body).length) {
+      res.status(400).json({
+        message: "Request body cannot be empty",
+      });
+      return;
+    }
+  
+    const { email } = req.body;
+  
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      res.status(409).json({
+        message: "User with the provided email already exists",
+      });
+      return;
+    }
+
+    if (email === "undefined") {
+        res.status(409).json({
+          message: "Something went wong",
+        });
+        return;
+      }
+      
+    const character = await create({ email });
+  
     if (character.error) {
-        res.status(500).json({
-            message: character.error,
-        });
+      res.status(500).json({
+        message: character.error,
+      });
+    } else {
+      res.status(201).json({
+        message: "New character record created",
+      });
     }
-    else {
-        res.status(201).json({
-            message: "New character record created",
-        });
-    }
-});
+  });
+  
 
 app.get("/characters/:id", async (req, res) => {
     const characters = await read();
