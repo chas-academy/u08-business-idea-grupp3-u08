@@ -1,17 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function NavBar() {
-  const [rerender, setRerender] = useState(false)
+  const [rerender, setRerender] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userData, setUserData] = useState({})
-  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
-  function loginWithGithub(){
-  window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID)
-  console.log(CLIENT_ID)
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  function loginWithGithub() {
+    window.location.assign(
+      "https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID
+    );
+    console.log(CLIENT_ID);
   }
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+  }
+  function toggleUser() {
+    setIsUserOpen(!isUserOpen);
   }
 
   useEffect(() => {
@@ -42,7 +49,6 @@ function NavBar() {
       localStorage.removeItem("name");
     }
   }, [rerender]);
-  
 
   async function getUserData() {
     await fetch("http://localhost:4000/getUserData", {
@@ -58,31 +64,32 @@ function NavBar() {
         console.log(data);
         localStorage.setItem("name", data.login);
         localStorage.setItem("id", data.id);
+        localStorage.setItem("avatar", data.avatar_url);
         setUserData(data);
-        sendUserId()
+        sendUserId();
       });
   }
-  
+
   async function sendUserId() {
     await fetch("http://localhost:4000/createuser", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: localStorage.getItem("id")}),
+      body: JSON.stringify({ email: localStorage.getItem("id") }),
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Failed to create user');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data.message);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to create user");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -91,12 +98,13 @@ function NavBar() {
           <img
             src="../../public/logo.png"
             className="h-10"
-            alt="Flowbite Logo"
+            alt="Chatlabs Logo"
           />
           <span className="self-center text-2xl font-semibold text-white">
             <span className="text-violet-500">Chat</span> Labs
           </span>
         </Link>
+
         <button
           onClick={toggleMenu}
           type="button"
@@ -118,13 +126,70 @@ function NavBar() {
             ></path>
           </svg>
         </button>
+
+        <div className="relative">
+          <button
+            onClick={toggleUser}
+            type="button"
+            className="px-4 py-2 text-sm font-medium text-white bg-neutral-950 rounded-t focus:outline-none focus:bg-neutral-950"
+          >
+            <img
+              src={localStorage.getItem("avatar")}
+              alt="logo"
+              className="h-8 inline mr-2 rounded-full"
+            />
+            {localStorage.getItem("name")}
+          </button>
+          {isUserOpen && (
+            <div>
+              <div
+                className={`${
+                  isUserOpen ? "block" : "hidden"
+                } w-full flex justify-end   md:block md:w-auto`}
+                id="navbar-solid-bg"
+              >
+                <ul className="flex flex-col items-start px-11  bg-neutral-950 absolute rounded-b">
+                  <li> </li>
+
+                  {localStorage.getItem("accessToken") ? (
+                    <>
+                      <button
+                        className="block   text-white rounded hover:text-violet-500"
+                        onClick={() => {
+                          localStorage.removeItem("accessToken");
+                          setRerender(!rerender);
+                        }}
+                      >
+                        Log out
+                      </button>
+                      {Object.keys(userData).length !== 0 ? <></> : <></>}
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <button
+                          className="block py-2 pl-3 pr-4  text-white rounded hover:text-violet-500"
+                          onClick={loginWithGithub}
+                        >
+                          Login
+                        </button>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
           } w-full md:block md:w-auto`}
           id="navbar-solid-bg"
         >
-          <ul className="flex flex-col mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+          <ul className="flex flex-col items-start mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent ">
+            <li></li>
             <li>
               <Link
                 to="/"
@@ -150,34 +215,46 @@ function NavBar() {
                 Dashboard
               </Link>
             </li>
-            {localStorage.getItem("accessToken") ? 
+            {/* {localStorage.getItem("accessToken") ? (
               <>
-                <button className='block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500' onClick={() => {
-                  localStorage.removeItem("accessToken")
-                  setRerender(!rerender)
+                <button
+                  className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                  onClick={() => {
+                    localStorage.removeItem("accessToken");
+                    setRerender(!rerender);
                   }}
                 >
                   Log out
                 </button>
-                {Object.keys(userData).length !== 0 ?
+                {Object.keys(userData).length !== 0 ? (
                   <>
-                  <h2 className='block py-2 pl-3 pr-4 text-white rounded'>Welcome {localStorage.getItem("name")}</h2>
+                    <h2 className="block py-2 pl-3 pr-4 text-white rounded">
+                      {" "}
+                      <img
+                        src={localStorage.getItem("avatar")}
+                        alt="logo"
+                        className="h-8 inline mr-2 rounded-full"
+                      />
+                      {localStorage.getItem("name")}
+                    </h2>
                   </>
-                  :
-                  <>
-                  </>
-                }
+                ) : (
+                  <></>
+                )}
               </>
-            :
+            ) : (
               <>
-              <li>
-                <button className='block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500' onClick={loginWithGithub}>
-                Login
-                </button>
-              </li>
+                <li>
+                  <button
+                    className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                    onClick={loginWithGithub}
+                  >
+                    Login
+                  </button>
+                </li>
               </>
-            }
-            </ul>
+            )} */}
+          </ul>
         </div>
       </div>
     </nav>
