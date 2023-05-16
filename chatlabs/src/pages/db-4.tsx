@@ -2,6 +2,19 @@ import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 
 function DashBoard4() {
+
+ /*  const updateCharacter = async () => {
+    const response = await fetch("http://localhost:4000/edit/645c135cc694d3ad0bccbde3/645d02e35223a7e8c1baf7e9");
+    const res = await response.json();
+    console.log(res);
+  } */
+
+  const deleteCharacter = async () => {
+    const response = await fetch("http://localhost:4000/delete/645c1385353c806b4d791675/645e1e0fb080f6870ecfbe33", {method: "delete"});
+    const res = await response.json();
+    console.log(res);
+  }
+
     return (
       <>
         {/*Banner */}
@@ -25,7 +38,7 @@ function DashBoard4() {
           >
             <path
               fill="#0a0a0a"
-              fill-opacity="1"
+              fillOpacity="1"
               d="M0,128L1440,64L1440,0L0,0Z"
             ></path>
           </svg>
@@ -53,11 +66,11 @@ function DashBoard4() {
            <div className="flex justify-between mt">
             <button className="px-7 py-2 bg-zinc-600 text-white font-semibold rounded-lg uppercase">Back</button>
             <div>
-              <button className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg mr-2">
+              <button /* onClick={() => updateCharacter()} */ className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg mr-2">
               <PencilIcon className="h-5 w-5" /> {/* Penna Icon */}
               </button>
 
-              <button className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
+              <button onClick={() => deleteCharacter()} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
               <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
 
               </button>
