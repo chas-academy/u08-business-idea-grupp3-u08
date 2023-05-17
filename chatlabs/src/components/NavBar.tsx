@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GoogleLogin } from '@react-oauth/google';
-import jwtDecode from "jwt-decode";
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import axios from "axios";
+
 function NavBar() {
-  const [rerender, setRerender] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [userAvatar, setuserAvatar] = useState(String || null);
-
+  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
+  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
+  const [userName, setuserName] = useState(localStorage.getItem("name"));
+  const [isLoggedin, setisLoggedin] = useState(true);
+  
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
-  }
-  function toggleUser() {
-    setIsUserOpen(!isUserOpen);
   }
 
   async function AddEmailToDB(data:any) {
@@ -26,6 +25,29 @@ function NavBar() {
     });
     return response.json();
   }
+  const login = useGoogleLogin({
+    onSuccess: async response => {
+      try {
+        const info = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: {
+          "Authorization": `Bearer ${response.access_token}`
+        }
+      })
+      console.log(info);
+      AddEmailToDB(info.data.email)
+      localStorage.setItem("avatar", info.data.picture)
+      localStorage.setItem("email", info.data.email)
+      localStorage.setItem("name", info.data.given_name)
+      setuserAvatar(localStorage.getItem("avatar", info.data.picture))
+      setuserEmail(localStorage.getItem("email", info.data.email))
+      setuserName(localStorage.getItem("name", info.data.given_name))
+      setisLoggedin(localStorage.setItem("isloggedin", true))
+    } catch (err) {
+      console.log(err)
+    }
+      }
+  });
+
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
@@ -95,59 +117,33 @@ function NavBar() {
               </Link>
             </li>
             <li>
-            <GoogleLogin
-              onSuccess={credentialResponse => {
-                console.log(credentialResponse.credential);
-                var decoded = jwtDecode(credentialResponse.credential)
-                console.log(decoded)
-                AddEmailToDB(decoded.email)
-                localStorage.setItem("avatar", decoded.picture)
-                setuserAvatar(localStorage.getItem("avatar", decoded.picture))
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            />
+              <button onClick={login} className="text-white flex items-center bg-violet-700 hover:bg-violet-600 rounded ml-3 p-1.5">
+                Log in with
+                <svg className="h-5 inline ml-2" fill="whitesmoke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+              </button>
             </li>
-            {/* {localStorage.getItem("accessToken") ? (
-              <>
-                <button
-                  className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
-                  onClick={() => {
-                    localStorage.removeItem("accessToken");
-                    setRerender(!rerender);
-                  }}
-                >
-                  Log out
-                </button>
-                {Object.keys(userData).length !== 0 ? (
+                {isLoggedin !== false && isLoggedin !== undefined && userAvatar && userAvatar ? (
                   <>
                     <h2 className="block py-2 pl-3 pr-4 text-white rounded">
                       {" "}
                       <img
-                        src={localStorage.getItem("avatar")}
-                        alt="logo"
+                        src={userAvatar}
                         className="h-8 inline mr-2 rounded-full"
                       />
-                      {localStorage.getItem("name")}
+                      {userName}
                     </h2>
                   </>
                 ) : (
-                  <></>
-                )}
-              </>
-            ) : (
-              <>
-                <li>
+                  <>
+                  <li>
                   <button
                     className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
-                    onClick={loginWithGithub}
+                    onClick={login}
                   >
                     Login
                   </button>
-                </li>
-              </>
-            )} */}
+                </li></>
+                )}
           </ul>
         </div>
       </div>
