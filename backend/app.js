@@ -58,34 +58,40 @@ app.put("/create/:id", async (req, res) => {
         });
     }
 });
-app.delete("/delete/:id/:charId", async (req, res) => {
+app.delete("/delete/:id/:index", async (req, res) => {
     try {
-        const { id, charId } = req.params;
-        const user = await User.findByIdAndUpdate(
-            { _id: req.params.id },
-            { $pull: { Characters: { _id: charId } } },
-            { new: true }
-        );
-        if (user.nModified === 0) {
-            throw new Error("User not found");
-        }
-        res.status(200).json({
-            message: "Character removed from user",
-        });
+      const { id, index } = req.params;
+      const user = await User.findByIdAndUpdate(
+        { _id: id },
+        { $unset: { [`Characters.${index}`]: 1 } },
+        { new: true }
+      );
+      
+      if (!user) {
+        throw new Error("User not found");
+      }
+      
+      user.Characters = user.Characters.filter((_, i) => i != index); // Remove the element at the specified index
+      
+      await user.save();
+      
+      res.status(200).json({
+        message: "Character removed from user",
+      });
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-        });
+      res.status(500).json({
+        message: error.message,
+      });
     }
-});
+  });
 
-app.put("/edit/:id/:charId", async (req, res) => {
+app.put("/edit/:id/:index", async (req, res) => {
     try {
         const { name, backstory, traits } = req.body;
-        const { id, charId } = req.params;
+        const { id, index } = req.params;
         const user = await User.findOneAndUpdate(
-            { _id: req.params.id, "Characters._id": req.params.charId },
-            { $set: { "Characters.$": { name, backstory, traits } } },
+            { _id: id },
+            { $set: { [`Characters.${index}`]: { name, backstory, traits } } }
         );
         if (user.nModified === 0) {
             throw new Error("User not found");

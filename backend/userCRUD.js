@@ -45,25 +45,3 @@ exports.read = async (id) => {
         return { error: error.message, data: null };
     }
 }
-
-exports.update = async (id, data) => {
-    try {
-        const updatedBook = await Book.findByIdAndUpdate(id, data, { new: true });
-        if (!updatedBook)
-            throw new Error("Failed to update book");
-        return { error: null, data: updatedBook };
-    } catch (error) {
-        return { error: error.message, data: null };
-    }
-}
-
-exports.deleteBook = async (id) => {
-    try {
-        const isDeleted = await Book.findByIdAndDelete(id);
-        if (!isDeleted)
-            throw new Error("Failed to delete book");
-        return { error: null };
-    } catch (error) {
-        return { error: error.message };
-    }
-}
