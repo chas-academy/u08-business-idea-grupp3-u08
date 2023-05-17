@@ -7,6 +7,7 @@ import Steps from "./components/Steps";
 import DashBoard2 from "./pages/db-2";
 import DashBoard4 from "./pages/db-4";
 function App() {
+  
   return (
     <Router>
       <div className="App">

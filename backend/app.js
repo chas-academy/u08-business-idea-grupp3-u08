@@ -38,37 +38,6 @@ app.use(express.json());
 // parse url encoded objects- data sent through the url
 app.use(express.urlencoded({ extended: true }));
 
-//code from frontend
-app.get('/getAccessToken', async (req, res) => {
-    req.query.code
-    const params = "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&code=" + req.query.code
-    await fetch ("https://github.com/login/oauth/access_token" + params, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json"
-        }
-    }).then((response) =>{
-        return response.json()
-    }).then((data) => {
-        res.json(data)
-        console.log(data)
-    })
-})
-
-//getUserData
-app.get('/getUserData', async (req, res) => {
-    req.get("Authorization")
-    await fetch ("https://api.github.com/user", {
-        method: "GET",
-        headers: {
-            "Authorization" : req.get("Authorization")
-        }
-    }).then((response) =>{
-        return response.json()
-    }).then((data)=>{
-        res.json(data)
-    })
-})
 
 app.put("/create/:id", async (req, res) => {
     try {
