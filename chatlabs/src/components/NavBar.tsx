@@ -1,11 +1,30 @@
-import { Link } from 'react-router-dom';
-import { useState } from "react";
-
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GoogleLogin } from '@react-oauth/google';
+import jwtDecode from "jwt-decode";
 function NavBar() {
+  const [rerender, setRerender] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [userAvatar, setuserAvatar] = useState(String || null);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+  }
+  function toggleUser() {
+    setIsUserOpen(!isUserOpen);
+  }
+
+  async function AddEmailToDB(data:any) {
+    const response = await fetch("http://localhost:4000/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"email": data}),
+    });
+    return response.json();
   }
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -14,12 +33,13 @@ function NavBar() {
           <img
             src="../../public/logo.png"
             className="h-10"
-            alt="Flowbite Logo"
+            alt="Chatlabs Logo"
           />
           <span className="self-center text-2xl font-semibold text-white">
             <span className="text-violet-500">Chat</span> Labs
           </span>
         </Link>
+
         <button
           onClick={toggleMenu}
           type="button"
@@ -47,7 +67,8 @@ function NavBar() {
           } w-full md:block md:w-auto`}
           id="navbar-solid-bg"
         >
-          <ul className="flex flex-col mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+          <ul className="flex flex-col items-start mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent ">
+            <li></li>
             <li>
               <Link
                 to="/"
@@ -73,7 +94,61 @@ function NavBar() {
                 Dashboard
               </Link>
             </li>
-            </ul>
+            <li>
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse.credential);
+                var decoded = jwtDecode(credentialResponse.credential)
+                console.log(decoded)
+                AddEmailToDB(decoded.email)
+                localStorage.setItem("avatar", decoded.picture)
+                setuserAvatar(localStorage.getItem("avatar", decoded.picture))
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+            </li>
+            {/* {localStorage.getItem("accessToken") ? (
+              <>
+                <button
+                  className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                  onClick={() => {
+                    localStorage.removeItem("accessToken");
+                    setRerender(!rerender);
+                  }}
+                >
+                  Log out
+                </button>
+                {Object.keys(userData).length !== 0 ? (
+                  <>
+                    <h2 className="block py-2 pl-3 pr-4 text-white rounded">
+                      {" "}
+                      <img
+                        src={localStorage.getItem("avatar")}
+                        alt="logo"
+                        className="h-8 inline mr-2 rounded-full"
+                      />
+                      {localStorage.getItem("name")}
+                    </h2>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            ) : (
+              <>
+                <li>
+                  <button
+                    className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                    onClick={loginWithGithub}
+                  >
+                    Login
+                  </button>
+                </li>
+              </>
+            )} */}
+          </ul>
         </div>
       </div>
     </nav>
