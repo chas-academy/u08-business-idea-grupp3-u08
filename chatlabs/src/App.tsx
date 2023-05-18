@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Steps from "./components/Steps";
 import DashBoard2 from "./pages/db-2";
 import DashBoard4 from "./pages/db-4";
-import NewList from "./pages/NewList";
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <Router>
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard2" element={<DashBoard2 />} />
           <Route path="/dashboard4" element={<DashBoard4 />} />
-          <Route path="/dashboard" element={<NewList />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
