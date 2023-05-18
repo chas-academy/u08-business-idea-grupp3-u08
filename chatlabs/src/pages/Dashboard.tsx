@@ -15,7 +15,7 @@ function NewList() {
       console.log(res);
     } else {
       // Avbryt
-      console.log("Character not deleted");
+      alert("Character not deleted");
     }
   };
 
