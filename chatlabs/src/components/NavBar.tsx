@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function NavBar() {
@@ -67,13 +67,13 @@ function NavBar() {
             </li>
             <li>
               <Link
-                to="/dashboard2"
+                to="/dashboard"
                 className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
               >
                 Dashboard
               </Link>
             </li>
-            </ul>
+          </ul>
         </div>
       </div>
     </nav>

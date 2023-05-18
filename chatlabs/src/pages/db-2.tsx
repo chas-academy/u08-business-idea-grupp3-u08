@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function DashBoard2() {
   return (
     <>
@@ -44,11 +42,6 @@ function DashBoard2() {
               <button></button>
             </div>
           </form>
-        </div>
-      </div>
-      <div className="flex justify-center pt-10 mt-10 ">
-        <div className="bg-black text-slate-100 w-96 rounded-lg shadow-lg self-center text-center text-lg">
-          <Link to="/lists">See my characters</Link>
         </div>
       </div>
     </>
