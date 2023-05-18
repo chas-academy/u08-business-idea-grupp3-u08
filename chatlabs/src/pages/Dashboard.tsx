@@ -4,6 +4,21 @@ import { Link } from "react-router-dom";
 function NewList() {
   const [userData, setUserData] = useState<any[]>([]);
 
+  const deleteCharacter = async () => {
+    const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
+    if (confirmDelete) {
+      const response = await fetch(
+        "http://localhost:4000/delete/645c1385353c806b4d791675/645e1e0fb080f6870ecfbe33",
+        { method: "delete" }
+      );
+      const res = await response.json();
+      console.log(res);
+    } else {
+      // Avbryt
+      console.log("Character not deleted");
+    }
+  };
+
   useEffect(() => {
     fetch("http://localhost:4000/characters/645c1385353c806b4d791675") //Skapa dynamiskt id!
       .then((res) => res.json())
@@ -110,7 +125,7 @@ function NewList() {
                             <h3 className="text-slate-100 text-md text-center font-semibold">
                               Edit
                             </h3>
-                            <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
+                            <button className="px-2 bg-neutral-600 rounded-md p-1 m-1 hover:opacity-70">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -131,7 +146,10 @@ function NewList() {
                             <h3 className="text-slate-100 text-md text-center font-semibold">
                               Delete
                             </h3>
-                            <button className="px-2 bg-neutral-600 rounded-md p-1 m-1">
+                            <button
+                              onClick={() => deleteCharacter()}
+                              className="px-2 bg-neutral-600 rounded-md p-1 m-1 hover:opacity-70"
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
