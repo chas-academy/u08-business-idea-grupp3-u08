@@ -53,6 +53,14 @@ function NewList() {
             <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
               {userData &&
                 userData.map((character: any) => {
+                  const truncateText = (text: string, limit: number) => {
+                    const words = text.split(" ");
+                    if (words.length > limit) {
+                      return words.slice(0, limit).join(" ") + "...";
+                    }
+                    return text;
+                  };
+
                   return (
                     <>
                       <div
@@ -62,7 +70,11 @@ function NewList() {
                         <div className="col-span-2">
                           <div className="flex flex-col">
                             <h3 className="text-violet-500 uppercase ">Name</h3>
-                            <p>{character.name}</p>
+                            <Link to="/dashboard4">
+                              <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
+                                {truncateText(character.name, 2)}
+                              </p>
+                            </Link>
                           </div>
                         </div>
                         <div className="col-span-2">
@@ -71,9 +83,11 @@ function NewList() {
                               <h3 className="text-violet-500 uppercase ">
                                 Traits
                               </h3>
-                              <p className="text-slate-100 text-md px-5 md:px-0">
-                                {character.traits}
-                              </p>
+                              <Link to="/dashboard4">
+                                <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
+                                  {truncateText(character.traits, 2)}
+                                </p>
+                              </Link>
                             </div>
                           )}
                         </div>
@@ -83,7 +97,11 @@ function NewList() {
                               <h3 className="text-violet-500 uppercase ">
                                 Backstory
                               </h3>
-                              <p>{character.backstory}</p>
+                              <Link to="/dashboard4">
+                                <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
+                                  {truncateText(character.backstory, 2)}
+                                </p>
+                              </Link>
                             </div>
                           )}
                         </div>
@@ -141,9 +159,9 @@ function NewList() {
           <div className="flex flex-col p-2 my-12 md:w-72 border-l-4 border-slate-100">
             <button
               role="button"
-              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:opacity-80 hover:border-2 hover:border-slate-100 hover:pb-1 focus:opacity-60 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300"
+              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:border-2 hover:border-slate-100 hover:pb-1 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300"
             >
-              <Link to="/dashboard2">Create new character</Link>
+              <Link to="/dashboard2">Create character</Link>
             </button>
           </div>
         </div>
