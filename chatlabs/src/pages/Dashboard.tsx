@@ -50,27 +50,25 @@ function NewList() {
           </div>
 
           <>
-            <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 rounded-xl">
+            <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
               {userData &&
                 userData.map((character: any) => {
                   return (
                     <>
                       <div
-                        className="grid grid-cols-8 gap-4 bg-neutral-950 text-neutral-100 p-2 rounded-md"
-                        key={character.id}
+                        className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
+                        key={character._id}
                       >
                         <div className="col-span-2">
                           <div className="flex flex-col">
-                            <h3 className="text-violet-500 uppercase text-center">
-                              Name
-                            </h3>
+                            <h3 className="text-violet-500 uppercase ">Name</h3>
                             <p>{character.name}</p>
                           </div>
                         </div>
                         <div className="col-span-2">
                           {character.traits && (
                             <div className="flex flex-col">
-                              <h3 className="text-violet-500 uppercase text-center">
+                              <h3 className="text-violet-500 uppercase ">
                                 Traits
                               </h3>
                               <p className="text-slate-100 text-md px-5 md:px-0">
@@ -82,7 +80,7 @@ function NewList() {
                         <div className="col-span-2">
                           {character.backstory && (
                             <div className="flex flex-col">
-                              <h3 className="text-violet-500 uppercase text-center">
+                              <h3 className="text-violet-500 uppercase ">
                                 Backstory
                               </h3>
                               <p>{character.backstory}</p>
@@ -143,7 +141,7 @@ function NewList() {
           <div className="flex flex-col p-2 my-12 md:w-72 border-l-4 border-slate-100">
             <button
               role="button"
-              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:opacity-80 hover:border-2 hover:border-slate-100 hover:pb-1 focus:opacity-60"
+              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:opacity-80 hover:border-2 hover:border-slate-100 hover:pb-1 focus:opacity-60 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300"
             >
               <Link to="/dashboard2">Create new character</Link>
             </button>
