@@ -6,8 +6,6 @@ import Footer from "./components/Footer";
 import Steps from "./components/Steps";
 import DashBoard2 from "./pages/db-2";
 import DashBoard4 from "./pages/db-4";
-import NewList from "./pages/NewList";
-
 function App() {
   return (
     <Router>
