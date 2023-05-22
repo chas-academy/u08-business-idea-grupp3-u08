@@ -113,7 +113,7 @@ function NavBar() {
             </li>
             <li>
               <Link
-                to="/dashboard2"
+                to="/dashboard"
                 className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
               >
                 Dashboard
