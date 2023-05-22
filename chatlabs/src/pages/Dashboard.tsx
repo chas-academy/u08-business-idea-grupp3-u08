@@ -8,7 +8,7 @@ function NewList() {
     const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
-        "http://localhost:4000/delete/645c1385353c806b4d791675/645e1e0fb080f6870ecfbe33",
+        "http://localhost:4000/delete/645c1385353c806b4d791675/0",
         { method: "delete" }
       );
       const res = await response.json();
