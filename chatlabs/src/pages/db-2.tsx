@@ -1,7 +1,6 @@
 function DashBoard2() {
   return (
     <>
-      
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="flex flex-row justify-center my-20 md:flex-row">
@@ -27,27 +26,20 @@ function DashBoard2() {
           ></path>
         </svg>
       </div>
-      
+
       <div className="flex justify-center pt-10 mt-20">
         <div className="p-6 bg-black rounded-lg shadow-lg h-80 w-96">
-          <h2 className="justify-center mb-4 text-xl font-semibold uppercase text-violet-500">Create Character</h2>
+          <h2 className="justify-center mb-4 text-xl font-semibold uppercase text-violet-500">
+            Create Character
+          </h2>
           {/* Forms*/}
           <form>
-            <div className="mb-4">  
-              
-            </div>
-            
+            <div className="mb-4"></div>
+
             {/* Cancel och Submit knapppar*/}
             <div className="flex justify-end ">
-              <button
-               
-              >
-              </button>
-              <button>
-
-
-              </button>
-             
+              <button></button>
+              <button></button>
             </div>
           </form>
         </div>
@@ -55,6 +47,5 @@ function DashBoard2() {
     </>
   );
 }
-   
 
 export default DashBoard2;
