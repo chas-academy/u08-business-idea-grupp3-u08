@@ -1,7 +1,37 @@
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 
 function DashBoard4() {
+
+  const { id } = useParams();
+  const [character, setCharacter] = useState<{ name: string, backstory: string } | null>(null);
+
+  useEffect(() => {
+    const fetchCharacter = async () => {
+      try {
+        console.log(`Fetching character with: `);
+        const response = await axios.get(`http://localhost:4000/characters/645c1385353c806b4d791675`);
+        console.log('Response:', response.data.characters[0]);
+        setCharacter(response.data.characters[0]);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          console.log('Character not found');
+        } else {
+          console.log('An error occurred:', error);
+        }
+      }
+    };
+
+    
+    fetchCharacter();
+  }, [id]);
+
+  if (!character) {
+    return <div className='text-violet-500'>Loading...</div>;
+  }
     return (
       <>
         {/*Banner */}
@@ -37,17 +67,14 @@ function DashBoard4() {
       <div className="flex justify-center pt-5 px-96 m-36 ">
       <div className="p-5 bg-black rounded-lg shadow-lg h-full  ">
           {/*Content */}
-          <div className="pt-10 ">
-          <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase ">Character Name</h1>
+          <div className="pt-10">
+            <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase">
+              {character.name}
+            </h1>
           </div>
-          <div className="mx-10 ">
-          <h2 className="text-xl pr-10  text-violet-500 font-medium uppercase">Description:</h2>
-          <p className="text-white mt-10 mb-40">
-          Lorem ipsum dolor sit amet. Non autem numquam et delectus alias et quas autem ut ipsa velit et molestias dolorem et corrupti quisquam. Est laboriosam fugiat non necessitatibus explicabo ad quasi iure sit internos totam aut excepturi earum. 33 dolore atque qui officiis soluta aut animi molestias quo rerum repudiandae et molestiae excepturi qui atque quam.
-          Quo vitae blanditiis ea veritatis repellat eos tenetur quod vel distinctio temporibus id voluptas omnis. Ut blanditiis aspernatur ea provident veniam sed mollitia sint. Sed facilis expedita qui quas sint et nobis repellat est quisquam internos! Ut ullam autem 33 impedit consequatur et molestias eaque est consequatur dolor At iusto nostrum.
-          Ut eaque rerum et quas consequuntur non dolorem fugiat hic blanditiis repudiandae et ipsa nostrum sit enim ducimus aut corporis sint. Ut odio fugit est eius repudiandae ex neque rerum vel exercitationem tempore.
-
-          </p>
+          <div className="mx-10">
+            <h2 className="text-xl pr-10 text-violet-500 font-medium uppercase">Description:</h2>
+            <p className="text-white mt-10 mb-40">{character.backstory}</p>
           </div>
            {/* Buttons */}
            <div className="flex justify-between mt">

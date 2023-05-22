@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const app = express()
 const { create, readAll, read, update, deleteChar } = require("./userCRUD")
-const User = require("./userSchema")
+const User  = require("./userSchema")
 
 const CLIENT_ID = "252e6c426cbfb2206b35"
 const CLIENT_SECRET = "39793dc9261976717bc7ebc2ebf997ffe3099dbf"
@@ -167,6 +167,30 @@ app.get("/characters/:id", async (req, res) => {
         });
     }
 });
+
+//app.get('/characters/:id/:charId', async (req, res) => {
+//    try {
+//      const { id, charId } = req.params;
+//      const user = await User.findOne({ _id: id });
+//      if (!user) {
+//        throw new Error('User not found');
+//      }
+//      const character = user.Characters.find(char => char._id.toString() === charId);
+//      if (!character) {
+//        throw new Error('Character not found');
+//      }
+//      res.status(200).json({
+//        name: character.name,
+//        backstory: character.backstory,
+//        traits: character.traits
+//      });
+//    } catch (error) {
+//      res.status(500).json({
+//        message: error.message,
+//      });
+//    }
+//  });
+//
 
 
 // app.delete("/books/:bookID", async (req, res) => {
