@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function NewList() {
+function Dashboard() {
   const [userData, setUserData] = useState<any[]>([]);
 
   const deleteCharacter = async () => {
@@ -191,4 +191,4 @@ function NewList() {
     </>
   );
 }
-export default NewList;
+export default Dashboard;
