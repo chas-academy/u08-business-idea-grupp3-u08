@@ -77,15 +77,18 @@ function Dashboard() {
 
                 return (
                   <>
-                    <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 my-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
-                      <div
-                        className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
-                        key={character._id}
-                      >
-                        <div className="col-span-2">
-                          <div className="flex flex-col">
-                            <h3 className="text-violet-500 uppercase ">Name</h3>
-                            <Link to="/dashboard4" state={{index: `${index}` }} >
+                    <Link to="/dashboard4" state={{ index: `${index}` }}>
+                      <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 my-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition duration-300">
+                        <div
+                          className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
+                          key={character._id}
+                        >
+                          <div className="col-span-2">
+                            <div className="flex flex-col">
+                              <h3 className="text-violet-500 uppercase ">
+                                Name
+                              </h3>
+
                               <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
                                 {truncateText(character.name, 2)}
                               </p>
@@ -178,7 +181,7 @@ function Dashboard() {
           <div className="flex flex-col p-2 my-12 md:w-72 border-l-4 border-violet-500">
             <button
               role="button"
-              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:border-2 hover:border-slate-100 hover:pb-1 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/50 transition duration-300"
+              className="bg-violet-600 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer hover:border-2 hover:border-slate-100 hover:pb-1 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/40 transition duration-300"
             >
               <Link to="/dashboard2">Create character</Link>
             </button>
