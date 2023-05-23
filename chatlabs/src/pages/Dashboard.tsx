@@ -66,7 +66,7 @@ function Dashboard() {
 
           <>
             {userData &&
-              userData.map((character: any) => {
+              userData.map((character: any, index: number) => {
                 const truncateText = (text: string, limit: number) => {
                   const words = text.split(" ");
                   if (words.length > limit) {
@@ -77,19 +77,16 @@ function Dashboard() {
 
                 return (
                   <>
-                    <Link to="/Dashboard4">
-                      <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 my-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/50 transition duration-300">
-                        <div
-                          className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
-                          key={character._id}
-                        >
-                          <div className="col-span-2">
-                            <div className="flex flex-col">
-                              <h3 className="text-violet-500 uppercase ">
-                                Name
-                              </h3>
-
-                              <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500">
+                    <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 my-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
+                      <div
+                        className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
+                        key={character._id}
+                      >
+                        <div className="col-span-2">
+                          <div className="flex flex-col">
+                            <h3 className="text-violet-500 uppercase ">Name</h3>
+                            <Link to="/dashboard4" state={{index: `${index}` }} >
+                              <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
                                 {truncateText(character.name, 2)}
                               </p>
                             </div>
