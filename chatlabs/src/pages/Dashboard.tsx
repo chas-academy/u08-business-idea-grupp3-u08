@@ -66,7 +66,7 @@ function NewList() {
 
           <>
             {userData &&
-              userData.map((character: any) => {
+              userData.map((character: any, index: number) => {
                 const truncateText = (text: string, limit: number) => {
                   const words = text.split(" ");
                   if (words.length > limit) {
@@ -85,7 +85,7 @@ function NewList() {
                         <div className="col-span-2">
                           <div className="flex flex-col">
                             <h3 className="text-violet-500 uppercase ">Name</h3>
-                            <Link to="/dashboard4">
+                            <Link to="/dashboard4" state={{index: `${index}` }} >
                               <p className="text-slate-100 text-md px-5 md:px-0 hover:text-violet-500 hover:font-semibold">
                                 {truncateText(character.name, 2)}
                               </p>

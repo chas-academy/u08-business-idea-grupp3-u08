@@ -1,21 +1,23 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 
-function DashBoard4() {
+function DashBoard4(props: any) {
 
   const { id } = useParams();
   const [character, setCharacter] = useState<{ name: string, backstory: string } | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
         console.log(`Fetching character with: `);
-        const response = await axios.get(`http://localhost:4000/characters/645c1385353c806b4d791675`);
-        console.log('Response:', response.data.characters[0]);
-        setCharacter(response.data.characters[0]);
+        const response = await axios.get(`http://localhost:4000/getone/645c1385353c806b4d791675/`+ `${location.state.index}`);
+        console.log('Response:', response.data.character);
+        console.log(response.data)
+        setCharacter(response.data.character);
       } catch (error) {
         if (error.response && error.response.status === 404) {
           console.log('Character not found');
