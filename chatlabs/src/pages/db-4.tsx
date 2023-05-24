@@ -70,11 +70,10 @@ function DashBoard4(props: any) {
           <svg
             className="absolute inset-0 z-10 w-full -translate-y-12"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-          >
+            viewBox="0 0 1440 320">
             <path
               fill="#0a0a0a"
-              fill-opacity="1"
+              fillOpacity="1"
               d="M0,128L1440,64L1440,0L0,0Z"
             ></path>
           </svg>
@@ -83,36 +82,39 @@ function DashBoard4(props: any) {
 
 
         {/*Card */}
-      <div className="flex justify-center pt-5 px-96 m-36 ">
-      <div className="p-5 bg-black rounded-lg h-full shadow-lg shadow-violet-500/100 ">
-          {/*Content */}
-          <div className="pt-10">
-            <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase">
-              {character.name}
-            </h1>
+        <div className="flex justify-center pt-5 px-96 m-36 ">
+          <div className="p-5 bg-black rounded-lg h-full shadow-lg shadow-violet-500/100 ">
+            {/*Content */}
+            <div className="pt-10">
+              <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase">
+                {character.name}
+              </h1>
+            </div>
+            <div className="mx-10">
+              <h2 className="text-xl pr-10 text-violet-500 font-medium uppercase">Description:</h2>
+              <p className="text-white mt-10 mb-40">{character.backstory}</p>
+            </div>
+            {/* Buttons */}
+            <div className="flex justify-between mt">
+              <button className="px-7 py-2 bg-zinc-600 text-white font-semibold rounded-lg uppercase">Back</button>
+              <div>
+                <button onClick={() => setShowForm(!showForm)} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg mr-2">
+                <PencilIcon className="h-5 w-5" /> {/* Penna Icon */}
+                </button>
+
+                <button onClick={() => deleteCharacter()} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
+                <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
+
+                </button>
+                  <button onClick={() => deleteCharacter()} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
+                    <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
+                  </button>
+              </div>
+            </div>
           </div>
-          <div className="mx-10">
-            <h2 className="text-xl pr-10 text-violet-500 font-medium uppercase">Description:</h2>
-            <p className="text-white mt-10 mb-40">{character.backstory}</p>
-          </div>
-           {/* Buttons */}
-           <div className="flex justify-between mt">
-            <button className="px-7 py-2 bg-zinc-600 text-white font-semibold rounded-lg uppercase">Back</button>
-            <div>
-              <button onClick={() => setShowForm(!showForm)} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg mr-2">
-              <PencilIcon className="h-5 w-5" /> {/* Penna Icon */}
-              </button>
+        </div>
 
-              <button onClick={() => deleteCharacter()} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
-              <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
-
-              </button>
-              </div>
-              </div>
-              </div>
-              </div>
-
-              <div className="flex justify-center mt-10 pt-10 mb-10">
+        <div className="flex justify-center mt-10 pt-10 mb-10">
           <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl shadow-lg shadow-violet-500/50 hover:shadow-violet-500/100 transition duration-300">
             { showForm &&
               <form className=" bg-black rounded-xl shadow-lg p-10">
@@ -151,8 +153,10 @@ function DashBoard4(props: any) {
             }
           </div>
         </div>
-              </>
-              );
-            }
+      </>
+    );
+  }
+            
+  
   
 export default DashBoard4;
