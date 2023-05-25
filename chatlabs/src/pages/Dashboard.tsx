@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [userData, setUserData] = useState<any[]>([]);
+  const navigate = useNavigate();
 
   const deleteCharacter = async () => {
     const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
@@ -13,6 +14,8 @@ function Dashboard() {
       );
       const res = await response.json();
       console.log(res);
+      // redirect
+      navigate("/dashboard");
     } else {
       // Avbryt
       alert("Character not deleted");
@@ -78,7 +81,7 @@ function Dashboard() {
                 return (
                   <>
                     <Link to="/dashboard4" state={{ index: `${index}` }}>
-                      <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-4 my-4 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition duration-300">
+                      <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-2 my-2 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition duration-300">
                         <div
                           className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
                           key={character._id}
