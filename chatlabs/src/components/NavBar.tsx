@@ -1,12 +1,56 @@
-import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import axios from "axios";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isUserOpen, setIsUserOpen] = useState(false);
+  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
+  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
+  const [userName, setuserName] = useState(localStorage.getItem("name"));
+  const [isLoggedin, setisLoggedin] = useState(true);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
+
+  async function AddEmailToDB(data: any) {
+    const response = await fetch("http://localhost:4000/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: data }),
+    });
+    return response.json();
+  }
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const info = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+        console.log(info);
+        AddEmailToDB(info.data.email);
+        localStorage.setItem("avatar", info.data.picture);
+        localStorage.setItem("email", info.data.email);
+        localStorage.setItem("name", info.data.given_name);
+        setuserAvatar(localStorage.getItem("avatar", info.data.picture));
+        setuserEmail(localStorage.getItem("email", info.data.email));
+        setuserName(localStorage.getItem("name", info.data.given_name));
+        setisLoggedin(localStorage.setItem("isloggedin", true));
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
+
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
@@ -14,12 +58,13 @@ function NavBar() {
           <img
             src="../../public/logo.png"
             className="h-10"
-            alt="Flowbite Logo"
+            alt="Chatlabs Logo"
           />
           <span className="self-center text-2xl font-semibold text-white">
             <span className="text-violet-500">Chat</span> Labs
           </span>
         </Link>
+
         <button
           onClick={toggleMenu}
           type="button"
@@ -35,9 +80,9 @@ function NavBar() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -47,7 +92,8 @@ function NavBar() {
           } w-full md:block md:w-auto`}
           id="navbar-solid-bg"
         >
-          <ul className="flex flex-col mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+          <ul className="flex flex-col items-start mt-4 font-medium rounded-lg bg-neutral-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent ">
+            <li></li>
             <li>
               <Link
                 to="/"
@@ -67,13 +113,70 @@ function NavBar() {
             </li>
             <li>
               <Link
-                to="/dashboard2"
+                to="/dashboard"
                 className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
               >
                 Dashboard
               </Link>
             </li>
-            </ul>
+            <li></li>
+            {userAvatar && (
+              <li>
+                <h2 className="block py-2 pl-3 pr-4 text-white rounded">
+                  <img
+                    src={userAvatar}
+                    className="h-8 inline mr-2 rounded-full"
+                    alt="User Avatar"
+                  />
+                  {userName}
+                </h2>
+              </li>
+            )}
+            {!userAvatar && (
+              <li>
+                <button
+                  onClick={login}
+                  className="text-white flex items-center bg-violet-700 hover:bg-violet-600 rounded ml-3 p-1.5"
+                >
+                  Log in with
+                  <svg
+                    className="h-5 inline ml-2"
+                    fill="whitesmoke"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 488 512"
+                  >
+                    <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+                  </svg>
+                </button>
+              </li>
+            )}
+            {/* {isLoggedin !== false &&
+            isLoggedin !== undefined &&
+            userAvatar &&
+            userAvatar ? (
+              <>
+                <h2 className="block py-2 pl-3 pr-4 text-white rounded">
+                  {" "}
+                  <img
+                    src={userAvatar}
+                    className="h-8 inline mr-2 rounded-full"
+                  />
+                  {userName}
+                </h2>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button
+                    className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                    onClick={login}
+                  >
+                    Login
+                  </button>
+                </li>
+              </>
+            )} */}
+          </ul>
         </div>
       </div>
     </nav>

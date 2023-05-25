@@ -35,8 +35,7 @@ const DashBoard2: React.FC = () => {
 
   return (
     <>
-
-<section className="flex justify-center bg-neutral-950">
+      <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
           <section className="flex flex-row justify-center my-20 md:flex-row">
             <div className="flex flex-col justify-center mr-32">
