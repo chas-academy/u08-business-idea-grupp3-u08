@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [userData, setUserData] = useState<any[]>([]);
-  const navigate = useNavigate();
 
-  const deleteCharacter = async () => {
+  const deleteCharacter = async (index: number) => {
     const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
-        "http://localhost:4000/delete/645c1385353c806b4d791675/0",
+        `http://localhost:4000/delete/645c1385353c806b4d791675/${index}`,
         { method: "delete" }
       );
       const res = await response.json();
       console.log(res);
-      // redirect
-      navigate("/dashboard");
+      console.log("Character successfully deleted");
+      // Rerender
+      window.location.reload();
     } else {
       // Avbryt
       alert("Character not deleted");
@@ -153,7 +153,7 @@ function Dashboard() {
                                 Delete
                               </h3>
                               <button
-                                onClick={() => deleteCharacter()}
+                                onClick={() => deleteCharacter(index)}
                                 className="px-2 bg-neutral-600 rounded-md p-1 m-1 hover:opacity-70"
                               >
                                 <svg
