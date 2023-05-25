@@ -81,7 +81,7 @@ function Dashboard() {
                 return (
                   <>
                     <Link to="/dashboard4" state={{ index: `${index}` }}>
-                      <div className="grid grid-cols-1 gap-4 bg-neutral-500 p-2 my-2 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition duration-300">
+                      <div className="grid grid-cols-1 gap-4 p-2 my-2 rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition duration-300">
                         <div
                           className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
                           key={character._id}
