@@ -1,18 +1,26 @@
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export interface CharacterFormData {
-    name: string;
-    backstory: string;
-  }
-
-  interface CharacterFormProps {
-    onSubmit: (formData: CharacterFormData) => Promise<void>;
+  name: string;
+  backstory: string;
 }
 
-const CharacterForm: React.FC<CharacterFormProps> = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [backstory, setBackstory] = useState('');
+interface CharacterFormProps {
+  name: string;
+  backstory: string;
+  onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBackstoryChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (formData: CharacterFormData) => Promise<void>;
+}
 
+const CharacterForm: React.FC<CharacterFormProps> = ({
+  name,
+  backstory,
+  onNameChange,
+  onBackstoryChange,
+  onSubmit,
+}) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     await onSubmit({
@@ -21,20 +29,12 @@ const CharacterForm: React.FC<CharacterFormProps> = ({ onSubmit }) => {
     });
   };
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setName(event.target.value);
-  };
-
-  const handleBackstoryChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setBackstory(event.target.value);
-  };
-
   return (
     <form onSubmit={handleSubmit} className="bg-black rounded-xl shadow-lg p-10">
       <h2 className="text-xl text-violet-500 font-semibold mb-20 mt-8 uppercase text-center">Create Character</h2>
 
       <div className="mb-2">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
           Name
         </label>
         <input
@@ -43,11 +43,12 @@ const CharacterForm: React.FC<CharacterFormProps> = ({ onSubmit }) => {
           type="text"
           placeholder=""
           value={name}
-          onChange={handleNameChange}
+          onChange={onNameChange} // Använd onNameChange här för att binda händelsehanteraren
         />
       </div>
+
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="backstory" className="block text-gray-700 text-sm font-bold mb-2">
           Backstory
         </label>
         <input
@@ -56,23 +57,24 @@ const CharacterForm: React.FC<CharacterFormProps> = ({ onSubmit }) => {
           type="text"
           placeholder=""
           value={backstory}
-          onChange={handleBackstoryChange}
+          onChange={onBackstoryChange}
         />
       </div>
 
       <div className="flex items-center justify-between">
-        <button
+        <Link
+          to="/Dashboard"
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
-          type="submit"
         >
-          SUBMIT
-        </button>
-        <button
+          Submit
+        </Link>
+        
+        <Link
+          to="/"
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
-          type="button"
         >
           CANCEL
-        </button>
+        </Link>
       </div>
     </form>
   );
