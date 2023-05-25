@@ -36,8 +36,8 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
       traits: traits.trim(),
     });
 
-    // Navigera till en annan rutt efter att formuläret har skickats
-    navigate('/Dashboard'); // Ersätt '/ny-rutt' med den faktiska rutten du vill navigera till
+
+    navigate('/Dashboard');
   };
 
   return (

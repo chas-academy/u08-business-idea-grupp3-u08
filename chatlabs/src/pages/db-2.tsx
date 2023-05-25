@@ -9,7 +9,7 @@ const Dashboard2: React.FC = () => {
   const [backstory, setBackstory] = useState('');
   const [traits, setTraits] = useState('');
 
-  const navigate = useNavigate(); // Hämta navigeringsfunktionen
+  const navigate = useNavigate();
 
   const handleSubmit = async (formData: CharacterFormData): Promise<void> => {
     try {
@@ -29,12 +29,12 @@ const Dashboard2: React.FC = () => {
       const data = await response.json();
       setResponse(data.message);
 
-      // Clear the form fields
+
       setName('');
       setBackstory('');
       setTraits('');
 
-      navigate('/dashboard'); // Navigera till önskad rutt efter att formuläret har skickats
+      navigate('/dashboard');
     } catch (error) {
       console.error(error);
       setResponse('An error occurred. Please try again.');
