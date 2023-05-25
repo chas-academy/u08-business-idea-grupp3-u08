@@ -27,7 +27,7 @@ const DashBoard2: React.FC = () => {
       setResponse(data.message);
 
       // Navigera till en annan sida efter att formuläret har skickats
-      navigate('/NewList');
+      navigate('/Dashboard');
     } catch (error) {
       console.error(error);
     }
