@@ -4,7 +4,7 @@ import axios from 'axios';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 
-function DashBoard4(props: any) {
+function DashBoard4() {
 
   const { id } = useParams();
   const [character, setCharacter] = useState<{ name: string, backstory: string } | null>(null);
@@ -19,7 +19,7 @@ function DashBoard4(props: any) {
         console.log('Response:', response.data.character);
         console.log(response.data)
         setCharacter(response.data.character);
-      } catch (error) {
+      } catch (error:any) {
         if (error.response && error.response.status === 404) {
           console.log('Character not found');
         } else {
