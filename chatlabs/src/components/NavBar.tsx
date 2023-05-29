@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import { useState } from "react";
+import { useGoogleLogin} from "@react-oauth/google";
+// import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import axios from "axios";
 
 function NavBar() {
@@ -9,7 +10,6 @@ function NavBar() {
   const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
   const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
   const [userName, setuserName] = useState(localStorage.getItem("name"));
-  const [isLoggedin, setisLoggedin] = useState(true);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -41,15 +41,18 @@ function NavBar() {
         localStorage.setItem("avatar", info.data.picture);
         localStorage.setItem("email", info.data.email);
         localStorage.setItem("name", info.data.given_name);
-        setuserAvatar(localStorage.getItem("avatar", info.data.picture));
-        setuserEmail(localStorage.getItem("email", info.data.email));
-        setuserName(localStorage.getItem("name", info.data.given_name));
-        setisLoggedin(localStorage.setItem("isloggedin", true));
+        setuserAvatar(localStorage.getItem("avatar"));
+        setuserEmail(localStorage.getItem("email"));
+        setuserName(localStorage.getItem("name"));
       } catch (err) {
         console.log(err);
       }
     },
   });
+
+  const handleLoginClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    login();
+  };
 
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -80,9 +83,9 @@ function NavBar() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -128,6 +131,7 @@ function NavBar() {
                     className="h-8 inline mr-2 rounded-full"
                     alt="User Avatar"
                   />
+                  <h4 className="hidden">{userEmail}</h4>
                   {userName}
                 </h2>
               </li>
@@ -135,7 +139,7 @@ function NavBar() {
             {!userAvatar && (
               <li>
                 <button
-                  onClick={login}
+                  onClick={handleLoginClick}
                   className="text-white flex items-center bg-violet-700 hover:bg-violet-600 rounded ml-3 p-1.5"
                 >
                   Log in with
