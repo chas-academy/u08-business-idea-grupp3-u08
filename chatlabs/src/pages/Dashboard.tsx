@@ -8,7 +8,7 @@ function Dashboard() {
     const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
-        "http://localhost:4000/delete/645c1385353c806b4d791675/0",
+        `http://localhost:4000/delete/${localStorage.getItem("userId")}/0`,
         { method: "delete" }
       );
       const res = await response.json();
@@ -20,7 +20,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:4000/characters/645c1385353c806b4d791675") //Skapa dynamiskt id!
+    fetch(`http://localhost:4000/characters/${localStorage.getItem("userId")}`) //Skapa dynamiskt id!
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
