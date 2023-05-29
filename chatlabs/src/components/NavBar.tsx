@@ -10,21 +10,44 @@ function NavBar() {
   const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
   const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
   const [userName, setuserName] = useState(localStorage.getItem("name"));
+  const [userId, setuserId] = useState(localStorage.getItem("userid"));
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  async function AddEmailToDB(data: any) {
+  async function AddEmailToDB(data: any, subData:any) {
     const response = await fetch("http://localhost:4000/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data }),
+      body: JSON.stringify({ email: data, sub: subData}),
     });
     return response.json();
   }
+
+  async function getUserId(sub: string) {
+    let data;
+  
+    try {
+      const response = await fetch(`http://localhost:4000/getid/${sub}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (data && data.userId) {
+      localStorage.setItem("userId", data.userId);
+    }
+  }
+
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       try {
@@ -37,10 +60,12 @@ function NavBar() {
           }
         );
         console.log(info);
-        AddEmailToDB(info.data.email);
+        AddEmailToDB(info.data.email, info.data.sub);
+        getUserId(info.data.sub)
         localStorage.setItem("avatar", info.data.picture);
         localStorage.setItem("email", info.data.email);
         localStorage.setItem("name", info.data.given_name);
+        setuserId(localStorage.getItem("userid"))
         setuserAvatar(localStorage.getItem("avatar"));
         setuserEmail(localStorage.getItem("email"));
         setuserName(localStorage.getItem("name"));
@@ -59,7 +84,7 @@ function NavBar() {
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <Link to="/" className="flex items-center">
           <img
-            src="../../public/logo.png"
+            src="https://drive.google.com/uc?id=1NJrgM8zoisyIYc_hE66zxhEEOA4Po76h"
             className="h-10"
             alt="Chatlabs Logo"
           />
@@ -132,6 +157,7 @@ function NavBar() {
                     alt="User Avatar"
                   />
                   <h4 className="hidden">{userEmail}</h4>
+                  <h4 className="hidden">{userId}</h4>
                   {userName}
                 </h2>
               </li>

@@ -204,6 +204,26 @@ app.get('/prompt/:id/:index', async (req, res) => {
    }
  });
 
+ app.get("/getid/:sub/", async (req, res) => {
+  try {
+    const { sub } = req.params;
+    const user = await User.findOne({ sub: sub });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const userId = user._id;
+
+    res.status(200).json({
+      userId,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 
 app.post("/createuser", async (req, res) => {
   // Check if req.body is empty
@@ -214,7 +234,7 @@ app.post("/createuser", async (req, res) => {
     return;
   }
 
-  const { email } = req.body;
+  const { email, sub } = req.body;
 
   // Check if the email already exists
   const existingUser = await User.findOne({ email });
@@ -232,7 +252,7 @@ app.post("/createuser", async (req, res) => {
     return;
   }
 
-  const character = await create({ email });
+  const character = await create({ email, sub });
 
   if (character.error) {
     res.status(500).json({

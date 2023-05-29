@@ -9,7 +9,7 @@ function Footer() {
               className="flex items-center mb-4 sm:mb-0"
             >
               <img
-                src="../../public/logo.png"
+                src="https://drive.google.com/uc?id=1NJrgM8zoisyIYc_hE66zxhEEOA4Po76h"
                 className="h-8 mr-3"
                 alt="Flowbite Logo"
               />
@@ -23,7 +23,7 @@ function Footer() {
                   About
                 </a>
               </li>
-              <li>
+              <li> 
                 <a href="#" className="mr-4 hover:underline md:mr-6">
                   Privacy Policy
                 </a>
@@ -49,5 +49,7 @@ function Footer() {
     </div>
   );
 }
+
+
 
 export default Footer;
