@@ -157,6 +157,7 @@ function NavBar() {
                     alt="User Avatar"
                   />
                   <h4 className="hidden">{userEmail}</h4>
+                  <h4 className="hidden">{userId}</h4>
                   {userName}
                 </h2>
               </li>
