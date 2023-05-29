@@ -2,8 +2,8 @@
 
 function FormModal({closeFormModal}) {
     
-    async function updateCharacter() {
-        await fetch("http://localhost:4000/edit/645c1385353c806b4d791675/0", {
+    async function updateCharacter(index: number) {
+        await fetch(`http://localhost:4000/edit/${localStorage.getItem("userId")}/${index}`, {
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',
