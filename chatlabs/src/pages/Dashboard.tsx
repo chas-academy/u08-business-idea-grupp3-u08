@@ -8,7 +8,7 @@ function Dashboard() {
     const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
-        `http://localhost:4000/delete/645c1385353c806b4d791675/${index}`,
+        `http://localhost:4000/delete/645c14363a7771deaf6943d8/${index}`,
         { method: "delete" }
       );
       const res = await response.json();
@@ -23,7 +23,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:4000/characters/645c1385353c806b4d791675") //Skapa dynamiskt id!
+    fetch("http://localhost:4000/characters/645c14363a7771deaf6943d8") //Skapa dynamiskt id!
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -153,7 +153,10 @@ function Dashboard() {
                                 Delete
                               </h3>
                               <button
-                                onClick={() => deleteCharacter(index)}
+                                onClick={(event) => {
+                                  event.preventDefault();
+                                  deleteCharacter(index);
+                                }}
                                 className="px-2 bg-neutral-600 rounded-md p-1 m-1 hover:opacity-70"
                               >
                                 <svg
