@@ -84,7 +84,7 @@ function NavBar() {
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <Link to="/" className="flex items-center">
           <img
-            src="../../public/logo.png"
+            src="../assets/logo.png"
             className="h-10"
             alt="Chatlabs Logo"
           />
