@@ -9,7 +9,7 @@ function Footer() {
               className="flex items-center mb-4 sm:mb-0"
             >
               <img
-                src="../src/assets/logo.png"
+                src="https://drive.google.com/uc?id=1NJrgM8zoisyIYc_hE66zxhEEOA4Po76h"
                 className="h-8 mr-3"
                 alt="Flowbite Logo"
               />
