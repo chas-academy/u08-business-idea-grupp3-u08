@@ -23,7 +23,7 @@ function Footer() {
                   About
                 </a>
               </li>
-              <li>
+              <li> 
                 <a href="#" className="mr-4 hover:underline md:mr-6">
                   Privacy Policy
                 </a>
@@ -49,5 +49,7 @@ function Footer() {
     </div>
   );
 }
+
+
 
 export default Footer;
