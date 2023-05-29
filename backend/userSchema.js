@@ -7,7 +7,7 @@ const usersSchema = mongoose.Schema({
     },
     sub: {
         type: String,
-        required: true
+        required: false
     },
     Characters: [
         {   
