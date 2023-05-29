@@ -5,6 +5,10 @@ const usersSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    sub: {
+        type: String,
+        required: false
+    },
     Characters: [
         {   
             name: {

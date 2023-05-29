@@ -15,7 +15,7 @@ function DashBoard4() {
     const fetchCharacter = async () => {
       try {
         console.log(`Fetching character with: `);
-        const response = await axios.get(`http://localhost:4000/getone/645c1385353c806b4d791675/`+ `${location.state.index}`);
+        const response = await axios.get(`http://localhost:4000/getone/${localStorage.getItem("userId")}/`+ `${location.state.index}`);
         console.log('Response:', response.data.character);
         console.log(response.data)
         setCharacter(response.data.character);
@@ -35,7 +35,7 @@ function DashBoard4() {
   
   
   const deleteCharacter = async () => {
-    const response = await fetch("http://localhost:4000/delete/645c1385353c806b4d791675/0", {method: "delete"});
+    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/0`, {method: "delete"});
     const res = await response.json();
     console.log(res);
   }
