@@ -45,42 +45,39 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
       <h2 className="text-xl text-violet-500 font-semibold mb-20 mt-8 uppercase text-center">Create Character</h2>
 
       <div className="field-wrapper">
-        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="name" className="block text-slate-300	text-sm font-bold mb-2">
           Name
         </label>
         <input
-          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-slate-300	mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="name"
           type="text"
-          placeholder=""
           value={name}
           onChange={onNameChange}
         />
       </div>
 
       <div className="field-wrapper">
-        <label htmlFor="backstory" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="backstory" className="block text-slate-300 text-sm font-bold mb-2">
           Backstory
         </label>
         <input
-          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
+          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-slate-300	leading-tight focus:outline-none focus:shadow-outline mb-3"
           id="backstory"
           type="text"
-          placeholder=""
           value={backstory}
           onChange={onBackstoryChange}
         />
       </div>
 
       <div className="field-wrapper">
-        <label htmlFor="traits" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="traits" className="block text-slate-300 text-sm font-bold mb-2">
           Traits
         </label>
         <input
-          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-20"
+          className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-slate-300	leading-tight focus:outline-none focus:shadow-outline mb-20"
           id="traits"
           type="text"
-          placeholder=""
           value={traits}
           onChange={onTraitsChange}
         />
