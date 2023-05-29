@@ -32,8 +32,8 @@ function DashBoard4() {
     fetchCharacter();
   }, [id]);
 
-  async function updateCharacter() {
-    await fetch(`http://localhost:4000/edit/${localStorage.getItem("userId")}/0`, {
+  async function updateCharacter(index: number) {
+    await fetch(`http://localhost:4000/edit/${localStorage.getItem("userId")}/${index}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -42,8 +42,8 @@ function DashBoard4() {
     });
   }
   
-  const deleteCharacter = async () => {
-    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/0`, {method: "delete"});
+  const deleteCharacter = async (index: number) => {
+    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/${index}`, {method: "delete"});
     const res = await response.json();
     console.log(res);
   }

@@ -14,7 +14,7 @@ const Dashboard2: React.FC = () => {
   const handleSubmit = async (formData: CharacterFormData): Promise<void> => {
     try {
       const { name, backstory, traits } = formData;
-      const response = await fetch(`http://localhost:4000/create/645c1385353c806b4d791675`, {
+      const response = await fetch(`http://localhost:4000/create/${localStorage.getItem("userId")}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
