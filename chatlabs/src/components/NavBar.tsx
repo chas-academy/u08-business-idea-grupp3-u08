@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import { useState } from "react";
+import { useGoogleLogin} from "@react-oauth/google";
+// import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import axios from "axios";
 
 function NavBar() {
@@ -9,22 +10,44 @@ function NavBar() {
   const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
   const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
   const [userName, setuserName] = useState(localStorage.getItem("name"));
-  const [isLoggedin, setisLoggedin] = useState(true);
+  const [userId, setuserId] = useState(localStorage.getItem("userid"));
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  async function AddEmailToDB(data: any) {
+  async function AddEmailToDB(data: any, subData:any) {
     const response = await fetch("http://localhost:4000/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data }),
+      body: JSON.stringify({ email: data, sub: subData}),
     });
     return response.json();
   }
+
+  async function getUserId(sub: string) {
+    let data;
+  
+    try {
+      const response = await fetch(`http://localhost:4000/getid/${sub}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (data && data.userId) {
+      localStorage.setItem("userId", data.userId);
+    }
+  }
+
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       try {
@@ -37,26 +60,31 @@ function NavBar() {
           }
         );
         console.log(info);
-        AddEmailToDB(info.data.email);
+        AddEmailToDB(info.data.email, info.data.sub);
+        getUserId(info.data.sub)
         localStorage.setItem("avatar", info.data.picture);
         localStorage.setItem("email", info.data.email);
         localStorage.setItem("name", info.data.given_name);
-        setuserAvatar(localStorage.getItem("avatar", info.data.picture));
-        setuserEmail(localStorage.getItem("email", info.data.email));
-        setuserName(localStorage.getItem("name", info.data.given_name));
-        setisLoggedin(localStorage.setItem("isloggedin", true));
+        setuserId(localStorage.getItem("userid"))
+        setuserAvatar(localStorage.getItem("avatar"));
+        setuserEmail(localStorage.getItem("email"));
+        setuserName(localStorage.getItem("name"));
       } catch (err) {
         console.log(err);
       }
     },
   });
 
+  const handleLoginClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    login();
+  };
+
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <Link to="/" className="flex items-center">
           <img
-            src="../../public/logo.png"
+            src="https://drive.google.com/uc?id=1NJrgM8zoisyIYc_hE66zxhEEOA4Po76h"
             className="h-10"
             alt="Chatlabs Logo"
           />
@@ -128,6 +156,8 @@ function NavBar() {
                     className="h-8 inline mr-2 rounded-full"
                     alt="User Avatar"
                   />
+                  <h4 className="hidden">{userEmail}</h4>
+                  <h4 className="hidden">{userId}</h4>
                   {userName}
                 </h2>
               </li>
@@ -135,7 +165,7 @@ function NavBar() {
             {!userAvatar && (
               <li>
                 <button
-                  onClick={login}
+                  onClick={handleLoginClick}
                   className="text-white flex items-center bg-violet-700 hover:bg-violet-600 rounded ml-3 p-1.5"
                 >
                   Log in with

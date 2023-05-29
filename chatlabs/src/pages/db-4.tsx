@@ -4,7 +4,7 @@ import axios from 'axios';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 
-function DashBoard4(props: any) {
+function DashBoard4() {
 
   const { id } = useParams();
   const [character, setCharacter] = useState<{ name: string, backstory: string } | null>(null);
@@ -15,11 +15,11 @@ function DashBoard4(props: any) {
     const fetchCharacter = async () => {
       try {
         console.log(`Fetching character with: `);
-        const response = await axios.get(`http://localhost:4000/getone/645c1385353c806b4d791675/`+ `${location.state.index}`);
+        const response = await axios.get(`http://localhost:4000/getone/${localStorage.getItem("userId")}/`+ `${location.state.index}`);
         console.log('Response:', response.data.character);
         console.log(response.data)
         setCharacter(response.data.character);
-      } catch (error) {
+      } catch (error:any) {
         if (error.response && error.response.status === 404) {
           console.log('Character not found');
         } else {
@@ -33,7 +33,7 @@ function DashBoard4(props: any) {
   }, [id]);
 
   async function updateCharacter() {
-    await fetch("http://localhost:4000/edit/645c1385353c806b4d791675/0", {
+    await fetch(`http://localhost:4000/edit/${localStorage.getItem("userId")}/0`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function DashBoard4(props: any) {
   }
   
   const deleteCharacter = async () => {
-    const response = await fetch("http://localhost:4000/delete/645c1385353c806b4d791675/0", {method: "delete"});
+    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/0`, {method: "delete"});
     const res = await response.json();
     console.log(res);
   }
