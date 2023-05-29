@@ -154,8 +154,8 @@ function Dashboard() {
                               </h3>
                               <button
                                 onClick={(event) => {
-                                  event.preventDefault();
                                   deleteCharacter(index);
+                                  event.preventDefault();
                                 }}
                                 className="px-2 bg-neutral-600 rounded-md p-1 m-1 hover:opacity-70"
                               >
