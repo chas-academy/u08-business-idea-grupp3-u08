@@ -34,8 +34,8 @@ function DashBoard4() {
 
   
   
-  const deleteCharacter = async () => {
-    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/0`, {method: "delete"});
+  const deleteCharacter = async (index: number) => {
+    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/${index}`, {method: "delete"});
     const res = await response.json();
     console.log(res);
   }
