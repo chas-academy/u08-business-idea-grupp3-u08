@@ -32,10 +32,13 @@ function DashBoard4() {
     fetchCharacter();
   }, [id]);
 
-  
-  
   const deleteCharacter = async (index: number) => {
-    const response = await fetch(`http://localhost:4000/delete/${localStorage.getItem("userId")}/${index}`, {method: "delete"});
+    const response = await fetch(
+      `http://localhost:4000/delete/${localStorage.getItem(
+        "userId"
+      )}/${index}`,
+      {method: "delete"}
+    );
     const res = await response.json();
     console.log(res);
   }
@@ -70,8 +73,6 @@ function DashBoard4() {
             ></path>
           </svg>
         </div>
-        
-
 
         {/*Card */}
         <div className="flex justify-center pt-5 px-96 m-36 ">
@@ -94,7 +95,12 @@ function DashBoard4() {
                 <PencilIcon className="h-5 w-5" /> {/* Penna Icon */}
                 </button>
 
-                <button onClick={() => deleteCharacter()} className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
+                <button 
+                onClick={(event) => {
+                  deleteCharacter(index);
+                  event.preventDefault();
+                  }} 
+                  className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
                 <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
                 </button>
               </div>
@@ -106,6 +112,4 @@ function DashBoard4() {
     );
   }
             
-  
-  
 export default DashBoard4;
