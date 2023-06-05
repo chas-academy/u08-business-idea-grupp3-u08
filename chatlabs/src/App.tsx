@@ -7,6 +7,7 @@ import Steps from "./components/Steps";
 import DashBoard2 from "./pages/db-2";
 import DashBoard4 from "./pages/db-4";
 import Dashboard from "./pages/Dashboard";
+
 function App() {
   return (
     <Router>
@@ -37,24 +38,24 @@ function Home() {
     <>
       <section className="flex justify-center bg-neutral-950">
         <div className="w-full h-full md:max-w-2xl">
-          <section className="my-20 flex flex-row md:flex-row justify-center">
+          <section className="flex flex-row justify-center my-20 md:flex-row">
             <div className="flex flex-col justify-center mr-32">
-              <h1 className="text-slate-100 text-6xl font-light uppercase">
+              <h1 className="text-6xl font-light uppercase text-slate-100">
                 <span className="text-violet-500">Chat</span> Labs
               </h1>
-              <p className="text-slate-100 text-2xl font-semibold uppercase my-2">
+              <p className="my-2 text-2xl font-semibold uppercase text-slate-100">
                 Creating characters <br /> that come to{" "}
                 <span className="text-violet-500">life</span>
               </p>
             </div>
-            <div className="hidden sm:block relative h-96 ">
+            <div className="relative hidden sm:block h-96 ">
               <img
-                className="h-full w-full  animate-pulse object-cover shadow-lg  shadow-violet-500/100 transition duration-300 rounded-xl"
+                className="object-cover w-full h-full transition duration-300 shadow-lg animate-pulse shadow-violet-500/100 rounded-xl"
                 src="https://image.lexica.art/full_jpg/a868d5f3-410e-4102-a1c2-a240306eae0f"
                 alt=""
               />
               <img
-                className="h-full w-full object-cover rounded-xl absolute top-0 left-0"
+                className="absolute top-0 left-0 object-cover w-full h-full rounded-xl"
                 src="https://image.lexica.art/full_jpg/a868d5f3-410e-4102-a1c2-a240306eae0f"
                 alt=""
               />
@@ -62,7 +63,7 @@ function Home() {
                 loop
                 animationData={lottieJson}
                 play
-                className="absolute top-24 left-0 h-full w-full object-cover rounded-xl"
+                className="absolute left-0 object-cover w-full h-full top-24 rounded-xl"
               />
             </div>
           </section>
@@ -70,7 +71,7 @@ function Home() {
       </section>
       <div className="relative w-full">
         <svg
-          className="w-full inset-0 absolute z-10 -translate-y-12"
+          className="absolute inset-0 z-10 w-full -translate-y-12"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -84,15 +85,15 @@ function Home() {
       <section className="flex justify-center bg-neutral-900 mt-28">
         <section className="flex justify-center px-0 sm:px-5">
           <div className="w-full md:max-w-2xl">
-            <div className="my-20 flex md:flex-row flex-col items-center">
-              <div className="flex flex-col items-start justify-center pr-0 md:pr-16 max-w-md order-1">
-                <div className="flex h-auto justify-self-start my-3">
-                  <div className="bg-violet-500 w-1 mr-5"></div>
-                  <h2 className="text-xl font-semibold text-slate-100 py-3 mx-auto md:mx-0">
+            <div className="flex flex-col items-center my-20 md:flex-row">
+              <div className="flex flex-col items-start justify-center order-1 max-w-md pr-0 md:pr-16">
+                <div className="flex h-auto my-3 justify-self-start">
+                  <div className="w-1 mr-5 bg-violet-500"></div>
+                  <h2 className="py-3 mx-auto text-xl font-semibold text-slate-100 md:mx-0">
                     Level Up Your NPC Interaction
                   </h2>
                 </div>
-                <p className="text-slate-100 text-md px-5 md:px-0">
+                <p className="px-5 text-slate-100 text-md md:px-0">
                   Gone are the days of static and scripted{" "}
                   <span className="text-violet-500">NPC responses</span>. With
                   Chat Labs, you'll experience a new level of interaction that's
@@ -106,7 +107,7 @@ function Home() {
                   that makes your game world feel alive.
                 </p>
               </div>
-              <div className="h-full w-7/12 object-cover rounded-xl md:order-2 sm:w-1/2 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/75 transition duration-300">
+              <div className="object-cover w-7/12 h-full transition duration-300 shadow-lg rounded-xl md:order-2 sm:w-1/2 shadow-violet-500/20 hover:shadow-violet-500/75">
                 <img
                   className="rounded-xl "
                   src="https://image.lexica.art/full_jpg/985c586b-8dc0-4031-9894-51fdfa775dbf"
@@ -120,23 +121,23 @@ function Home() {
       <section className="flex justify-center bg-neutral-900">
         <section className="flex justify-center px-0 sm:px-5">
           <div className="w-full md:max-w-2xl">
-            <div className="my-20 flex md:flex-row flex-col items-center">
-              <div className="h-full w-7/12 object-cover rounded-xl md:order-1 sm:w-1/2 shadow-lg shadow-amber-200/20 hover:shadow-amber-200/75 transition duration-300">
+            <div className="flex flex-col items-center my-20 md:flex-row">
+              <div className="object-cover w-7/12 h-full transition duration-300 shadow-lg rounded-xl md:order-1 sm:w-1/2 shadow-amber-200/20 hover:shadow-amber-200/75">
                 <img
                   className="rounded-xl "
                   src="https://image.lexica.art/full_jpg/ac0efe10-c183-474b-90ef-2d03446dc355"
                   alt=""
                 />
               </div>
-              <div className="flex flex-col items-start justify-center pr-0 md:pl-16 max-w-md order-1">
-                <div className="flex h-auto justify-self-start my-3">
-                  <div className="bg-violet-500 w-1 ml-5 order-1"></div>
-                  <h2 className="text-xl font-semibold text-slate-100 py-3 mx-auto md:mx-0">
+              <div className="flex flex-col items-start justify-center order-1 max-w-md pr-0 md:pl-16">
+                <div className="flex h-auto my-3 justify-self-start">
+                  <div className="order-1 w-1 ml-5 bg-violet-500"></div>
+                  <h2 className="py-3 mx-auto text-xl font-semibold text-slate-100 md:mx-0">
                     Inclusive Gaming with{" "}
                     <span className="text-violet-500">Chat Labs</span>
                   </h2>
                 </div>
-                <p className="text-slate-100 text-md px-5 md:px-0">
+                <p className="px-5 text-slate-100 text-md md:px-0">
                   With <span className="text-violet-500">Chat Labs</span>, you
                   can create more{" "}
                   <span className="text-violet-500">inclusive and diverse</span>{" "}
