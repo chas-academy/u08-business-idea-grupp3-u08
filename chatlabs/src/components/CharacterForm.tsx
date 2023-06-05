@@ -88,14 +88,14 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
       <div className="flex items-center justify-between">
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
+          className="bg-violet-600 hover:bg-violet-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
         >
           Submit
         </button>
 
         <Link
           to="/"
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
+          className="bg-violet-600 hover:bg-violet-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline mb-10"
         >
           CANCEL
         </Link>
