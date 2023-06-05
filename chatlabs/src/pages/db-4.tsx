@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
@@ -30,7 +30,7 @@ function DashBoard4() {
 
     
     fetchCharacter();
-  }, [id]);
+  }, [id, location.state.index]);
 
   const deleteCharacter = async (index: number) => {
     const response = await fetch(
@@ -41,7 +41,10 @@ function DashBoard4() {
     );
     const res = await response.json();
     console.log(res);
+    navigate("/dashboard");
   }
+
+  const navigate = useNavigate();
 
   if (!character) {
     return <div className='text-violet-500'>Loading...</div>;
@@ -96,9 +99,8 @@ function DashBoard4() {
                 </button>
 
                 <button 
-                onClick={(event) => {
-                  deleteCharacter(index);
-                  event.preventDefault();
+                onClick={() => {
+                  deleteCharacter(location.state.index);
                   }} 
                   className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg">
                 <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
@@ -107,7 +109,7 @@ function DashBoard4() {
             </div>
           </div>
         </div>
-        {showForm && <FormModal closeFormModal={setShowForm} />}
+        {showForm && <FormModal data={location.state.index} closeFormModal={setShowForm} />}
       </>
     );
   }
