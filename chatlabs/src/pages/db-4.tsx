@@ -18,6 +18,7 @@ function DashBoard4() {
   const { id } = useParams()
   const [character, setCharacter] = useState<{
     name: string
+    traits:string
     backstory: string
   } | null>(null)
   const location = useLocation()
@@ -104,52 +105,55 @@ function DashBoard4() {
       )}
 
       {/*Banner */}
-      <section className=" flex justify-center bg-neutral-950">
-        <div className="w-full h-full md:max-w-2xl">
-          <section className="flex flex-row justify-center my-20 md:flex-row">
-            <div className="flex flex-col justify-center mr-32">
-              <h1 className=" text-6xl font-light uppercase text-slate-100 ">
-                <span className="text-violet-500">Dash</span>Board
-              </h1>
-            </div>
-          </section>
+      <section className="bg-neutral-950">
+        <div className="container mx-auto px-4 py-10">
+          <h1 className="text-4xl font-light text-center text-slate-100">
+            <span className="text-violet-500">CHARACTER</span> PROFILE
+          </h1>
         </div>
       </section>
 
-      {/*Card */}
-      <div className="flex justify-center pt-5 px-96 m-36 ">
-        <div className="p-5 bg-black rounded-lg h-full shadow-lg shadow-violet-500/100 ">
-          {/*Content */}
-          <div className="pt-10">
-            <h1 className="text-3xl text-violet-500 font-semibold text-center mb-40 uppercase">
+     {/*Card */}
+     <div className="container mx-auto px-4 py-10">
+        <div className="bg-black rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
+          <div className="p-5">
+            <h1 className="mb-4 text-2xl font-semibold text-center uppercase text-violet-500">
               {character.name}
             </h1>
+            <div className="mb-4">
+              <h2 className=" mb-2 text-lg font-medium uppercase text-violet-500">Traits:</h2>
+              <div className=" flex flex-wrap">
+                {character.traits.split(',').map((trait, index) => (
+                  <span key={index} className="zoom-in-trait flex items-center p-1 mb-2 mr-3 text-sm font-semibold text-white rounded-full bg-violet-700">
+                    <ExclamationCircleIcon className="w-4 h-4 mr-1 text-white" />
+                    <p className="text-white">{trait.trim()}</p>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">Backstory:</h2>
+              <p className="text-white">{character.backstory}</p>
+            </div>
           </div>
-          <div className="mx-10">
-            <h2 className="text-xl pr-10 text-violet-500 font-medium uppercase">
-              Description:
-            </h2>
-            <p className="text-white mt-10 mb-40">{character.backstory}</p>
-          </div>
+
           {/* Buttons */}
-          <div className="flex justify-between mt">
-            <button className="px-7 py-2 bg-zinc-600 text-white font-semibold rounded-lg uppercase">
-              Back
+          <div className="flex justify-between p-5">
+            <button onClick={handleGoBack} className="flex items-center justify-center px-4 py-2 font-bold text-white rounded-lg bg-violet-700">
+              <ArrowLeftIcon className="w-5 h-5 mr-1" />
+              
             </button>
             <div>
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg mr-2"
-              >
-                <PencilIcon className="h-5 w-5" /> {/* Penna Icon */}
+              <button onClick={() => setShowForm(!showForm)} className="flex items-center justify-center px-4 py-2 mr-2 font-semibold text-white rounded-lg bg-violet-700">
+                <PencilIcon className="w-5 h-5 mr-1" />
+                
               </button>
 
-              <button
-                onClick={() => deleteCharacter()}
-                className="px-4 py-2  bg-zinc-600 text-white font-semibold rounded-lg"
-              >
-                <TrashIcon className="h-5 w-5 " /> {/* Papperskorg Icon */}
+              <button onClick={() => deleteCharacter()} className="flex items-center justify-center px-4 py-2 font-semibold text-white rounded-lg bg-violet-700">
+                <TrashIcon className="w-5 h-5 mr-1" />
+                
               </button>
+              
               <button
                 onClick={() => setShowChat(!showChat)}
                 className="px-4 py-2  bg-violet-700 text-white rounded-lg"
@@ -165,37 +169,7 @@ function DashBoard4() {
                   <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                 </svg>
               </button>
-            </div>
-            <div>
-              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">
-                Backstory:
-              </h2>
-              <p className="text-white">{character.backstory}</p>
-            </div>
-          </div>
 
-          {/* Buttons */}
-          <div className="flex justify-between p-5">
-            <button
-              onClick={handleGoBack}
-              className="flex items-center justify-center px-4 py-2 font-bold text-white rounded-lg bg-violet-700"
-            >
-              <ArrowLeftIcon className="w-5 h-5 mr-1" />
-            </button>
-            <div>
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="flex items-center justify-center px-4 py-2 mr-2 font-semibold text-white rounded-lg bg-violet-700"
-              >
-                <PencilIcon className="w-5 h-5 mr-1" />
-              </button>
-
-              <button
-                onClick={() => deleteCharacter()}
-                className="flex items-center justify-center px-4 py-2 font-semibold text-white rounded-lg bg-violet-700"
-              >
-                <TrashIcon className="w-5 h-5 mr-1" />
-              </button>
             </div>
           </div>
         </div>
