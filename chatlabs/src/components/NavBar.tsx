@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useGoogleLogin} from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 // import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import axios from "axios";
 
@@ -16,20 +16,20 @@ function NavBar() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  async function AddEmailToDB(data: any, subData:any) {
+  async function AddEmailToDB(data: any, subData: any) {
     const response = await fetch("http://localhost:4000/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data, sub: subData}),
+      body: JSON.stringify({ email: data, sub: subData }),
     });
     return response.json();
   }
 
   async function getUserId(sub: string) {
     let data;
-  
+
     try {
       const response = await fetch(`http://localhost:4000/getid/${sub}`, {
         method: "GET",
@@ -37,7 +37,7 @@ function NavBar() {
           "Content-Type": "application/json",
         },
       });
-  
+
       data = await response.json();
     } catch (error) {
       console.log(error);
@@ -61,11 +61,11 @@ function NavBar() {
         );
         console.log(info);
         AddEmailToDB(info.data.email, info.data.sub);
-        getUserId(info.data.sub)
+        getUserId(info.data.sub);
         localStorage.setItem("avatar", info.data.picture);
         localStorage.setItem("email", info.data.email);
         localStorage.setItem("name", info.data.given_name);
-        setuserId(localStorage.getItem("userid"))
+        setuserId(localStorage.getItem("userid"));
         setuserAvatar(localStorage.getItem("avatar"));
         setuserEmail(localStorage.getItem("email"));
         setuserName(localStorage.getItem("name"));
@@ -139,14 +139,16 @@ function NavBar() {
                 Docs
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard"
-                className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
-              >
-                Dashboard
-              </Link>
-            </li>
+            {userEmail && (
+              <li>
+                <Link
+                  to="/dashboard"
+                  className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
             <li></li>
             {userAvatar && (
               <li>
