@@ -18,7 +18,7 @@ function DashBoard4() {
   const { id } = useParams()
   const [character, setCharacter] = useState<{
     name: string
-    traits:string
+    traits: string
     backstory: string
   } | null>(null)
   const location = useLocation()
@@ -113,18 +113,23 @@ function DashBoard4() {
         </div>
       </section>
 
-     {/*Card */}
-     <div className="container mx-auto px-4 py-10">
+      {/*Card */}
+      <div className="container mx-auto px-4 py-10">
         <div className="bg-black rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
           <div className="p-5">
             <h1 className="mb-4 text-2xl font-semibold text-center uppercase text-violet-500">
               {character.name}
             </h1>
             <div className="mb-4">
-              <h2 className=" mb-2 text-lg font-medium uppercase text-violet-500">Traits:</h2>
+              <h2 className=" mb-2 text-lg font-medium uppercase text-violet-500">
+                Traits:
+              </h2>
               <div className=" flex flex-wrap">
-                {character.traits.split(',').map((trait, index) => (
-                  <span key={index} className="zoom-in-trait flex items-center p-1 mb-2 mr-3 text-sm font-semibold text-white rounded-full bg-violet-700">
+                {character.traits.split(",").map((trait, index) => (
+                  <span
+                    key={index}
+                    className="zoom-in-trait flex items-center py-2 px-3 m-1 text-sm font-semibold text-white rounded-full bg-violet-700"
+                  >
                     <ExclamationCircleIcon className="w-4 h-4 mr-1 text-white" />
                     <p className="text-white">{trait.trim()}</p>
                   </span>
@@ -132,31 +137,41 @@ function DashBoard4() {
               </div>
             </div>
             <div>
-              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">Backstory:</h2>
+              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">
+                Backstory:
+              </h2>
               <p className="text-white">{character.backstory}</p>
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between p-5">
-            <button onClick={handleGoBack} className="flex items-center justify-center px-4 py-2 font-bold text-white rounded-lg bg-violet-700">
-              <ArrowLeftIcon className="w-5 h-5 mr-1" />
-              
-            </button>
-            <div>
-              <button onClick={() => setShowForm(!showForm)} className="flex items-center justify-center px-4 py-2 mr-2 font-semibold text-white rounded-lg bg-violet-700">
-                <PencilIcon className="w-5 h-5 mr-1" />
-                
+          <div className="flex flex-row justify-between p-5">
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={handleGoBack}
+                className="flex items-center justify-center py-2 px-5 font-bold text-white rounded-lg bg-violet-700"
+              >
+                <ArrowLeftIcon className="w-5" />
+              </button>
+            </div>
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
+              >
+                <PencilIcon className="w-5" />
               </button>
 
-              <button onClick={() => deleteCharacter()} className="flex items-center justify-center px-4 py-2 font-semibold text-white rounded-lg bg-violet-700">
-                <TrashIcon className="w-5 h-5 mr-1" />
-                
+              <button
+                onClick={() => deleteCharacter()}
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
+              >
+                <TrashIcon className="w-5" />
               </button>
-              
+
               <button
                 onClick={() => setShowChat(!showChat)}
-                className="px-4 py-2  bg-violet-700 text-white rounded-lg"
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +184,6 @@ function DashBoard4() {
                   <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                 </svg>
               </button>
-
             </div>
           </div>
         </div>
