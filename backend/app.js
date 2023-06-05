@@ -109,10 +109,10 @@ app.put("/edit/:id/:index", async (req, res) => {
   }
 });
 
-app.get('/prompt/:id/:index', async (req, res) => {
+app.post('/prompt/:id/:index', async (req, res) => {
   try {
     const { id, index } = req.params;
-    const { prompt } = req.body; // Assuming the prompt is passed as {"prompt": "Your prompt here"} in the request body
+    const { ask } = req.body; // Assuming the prompt is passed as {"prompt": "Your prompt here"} in the request body
     const user = await User.findOne({ _id: id });
 
     if (!user) {
@@ -121,7 +121,7 @@ app.get('/prompt/:id/:index', async (req, res) => {
 
     const character = user.Characters[index];
 
-    let gptPrompt = `I'm going to give you a character in a video game and I want you to answer the player as if you are the character. Here are the specifics for the character. Personality trait for the character={${character.traits}}. Name = {${character.name}}. Backstory={${character.backstory}} The player asks the following={${prompt}} Just answer in first person as ${character.name} and do not give any actions as an answer, also do not describe what it does only quotes. Answer in dialogues. and do not give me the characters name at the beginning like this for example= Name: {answer} just give me the {answer} in quotes.`
+    let gptPrompt = `I'm going to give you a character in a video game and I want you to answer the player as if you are the character. Here are the specifics for the character. Personality trait for the character={${character.traits}}. Name = {${character.name}}. Backstory={${character.backstory}} The player asks the following={${ask}} Just answer in first person as ${character.name} and do not give any actions as an answer, also do not describe what it does only quotes. Answer in dialogues. and do not give me the characters name at the beginning like this for example= Name: {answer} just give me the {answer} in quotes.`
     // console.log(character.name)
     // console.log(character.backstory)
     // console.log(character.traits)
