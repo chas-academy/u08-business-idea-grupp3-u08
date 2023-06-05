@@ -31,11 +31,7 @@ function DashBoard4() {
         }
       }
     };
-
-    const animatedText = document.querySelector('.animated-text');
-    if (animatedText) {
-      animatedText.classList.add('typing-animation');
-    }
+    
 
     fetchCharacter();
   }, [id]);
