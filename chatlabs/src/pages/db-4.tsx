@@ -106,20 +106,6 @@ function DashBoard4() {
         </div>
       </section>
 
-      <div className="relative w-full">
-        <svg
-          className="absolute inset-0 z-10 w-full -translate-y-12"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-        >
-          <path
-            fill="#0a0a0a"
-            fillOpacity="1"
-            d="M0,128L1440,64L1440,0L0,0Z"
-          ></path>
-        </svg>
-      </div>
-
       {/*Card */}
       <div className="flex justify-center pt-5 px-96 m-36 ">
         <div className="p-5 bg-black rounded-lg h-full shadow-lg shadow-violet-500/100 ">
