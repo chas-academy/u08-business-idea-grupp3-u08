@@ -161,7 +161,7 @@ function NavBar() {
               </li>
             )}
             <li></li>
-            {userId && (
+            {userAvatar && (
               <li>
                 <h2 className="block py-2 pl-3 pr-4 text-white rounded">
                   <img
@@ -175,7 +175,7 @@ function NavBar() {
                 </h2>
               </li>
             )}
-            {!userId && (
+            {!userEmail && (
               <li>
                 <button
                   onClick={handleLoginClick}
@@ -193,7 +193,7 @@ function NavBar() {
                 </button>
               </li>
             )}
-            {userId && (
+            {userEmail && (
               <li>
                 <button
                   onClick={logOut}
