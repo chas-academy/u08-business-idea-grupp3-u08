@@ -1,37 +1,37 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 function Dashboard() {
-  const [userData, setUserData] = useState<any[]>([]);
+  const [userData, setUserData] = useState<any[]>([])
 
   const deleteCharacter = async (index: number) => {
-    const confirmDelete = window.confirm("Delete character?"); // Val att fortsätta eller avbryta
+    const confirmDelete = window.confirm("Delete character?") // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
         `http://localhost:4000/delete/${localStorage.getItem(
           "userId"
         )}/${index}`,
         { method: "delete" }
-      );
-      const res = await response.json();
-      console.log(res);
-      console.log("Character successfully deleted");
+      )
+      const res = await response.json()
+      console.log(res)
+      console.log("Character successfully deleted")
       // Rerender
-      window.location.reload();
+      window.location.reload()
     } else {
       // Avbryt
-      alert("Character not deleted");
+      alert("Character not deleted")
     }
-  };
+  }
 
   useEffect(() => {
     fetch(`http://localhost:4000/characters/${localStorage.getItem("userId")}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setUserData(data.characters);
-      });
-  }, []);
+        console.log(data)
+        setUserData(data.characters)
+      })
+  }, [])
 
   return (
     <>
@@ -47,12 +47,12 @@ function Dashboard() {
             {userData &&
               userData.map((character: any, index: number) => {
                 const truncateText = (text: string, limit: number) => {
-                  const words = text.split(" ");
+                  const words = text.split(" ")
                   if (words.length > limit) {
-                    return words.slice(0, limit).join(" ") + "...";
+                    return words.slice(0, limit).join(" ") + "..."
                   }
-                  return text;
-                };
+                  return text
+                }
 
                 return (
                   <>
@@ -124,8 +124,8 @@ function Dashboard() {
                             <div className="grid grid-cols-1 gap-2">
                               <button
                                 onClick={(event) => {
-                                  deleteCharacter(index);
-                                  event.preventDefault();
+                                  deleteCharacter(index)
+                                  event.preventDefault()
                                 }}
                                 className="px-2 bg-violet-700 rounded-md p-1 m-1 hover:opacity-70"
                               >
@@ -150,23 +150,23 @@ function Dashboard() {
                       </div>
                     </Link>
                   </>
-                );
+                )
               })}
           </>
 
           <div className="flex flex-col p-2 my-12 md:w-72 border-l-4 border-violet-500">
-          <Link to="/dashboard2">
-            <button
-              role="button"
-              className="bg-violet-600 hover:bg-violet-500 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer"
-            >
-              Create character
-            </button>
+            <Link to="/dashboard2">
+              <button
+                role="button"
+                className="bg-violet-600 hover:bg-violet-500 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer"
+              >
+                Create character
+              </button>
             </Link>
           </div>
         </div>
       </section>
     </>
-  );
+  )
 }
-export default Dashboard;
+export default Dashboard

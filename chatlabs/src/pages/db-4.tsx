@@ -8,7 +8,7 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/solid"
 import ChatPrompt from "../components/ChatPrompt"
-import FormModal from './FormModal'
+import FormModal from "./FormModal"
 
 function DashBoard4() {
   const handleGoBack = () => {
@@ -46,23 +46,18 @@ function DashBoard4() {
       }
     }
 
-    
-    fetchCharacter();
-  }, [id, location.state.index]);
+    fetchCharacter()
+  }, [id, location.state.index])
 
   const deleteCharacter = async (index: number) => {
     const response = await fetch(
-      `http://localhost:4000/delete/${localStorage.getItem(
-        "userId"
-      )}/${index}`,
-      {method: "delete"}
-    );
-    const res = await response.json();
-    console.log(res);
-    navigate("/dashboard");
+      `http://localhost:4000/delete/${localStorage.getItem("userId")}/${index}`,
+      { method: "delete" }
+    )
+    const res = await response.json()
+    console.log(res)
+    navigate("/dashboard")
   }
-
-  
 
   if (!character) {
     return <div className="text-violet-500">Loading...</div>
@@ -104,7 +99,7 @@ function DashBoard4() {
 
       {/*Card */}
       <div className="container mx-auto px-4 py-10">
-        <div className="bg-black rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
+        <div className="bg-neutral-950 rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
           <div className="p-5">
             <h1 className="mb-4 text-2xl font-semibold text-center uppercase text-violet-500">
               {character.name}
@@ -176,11 +171,12 @@ function DashBoard4() {
             </div>
           </div>
         </div>
-        {showForm && <FormModal data={location.state.index} closeFormModal={setShowForm} />}
-        </div>
-      </>
-    );
-  }
+        {showForm && (
+          <FormModal data={location.state.index} closeFormModal={setShowForm} />
+        )}
+      </div>
+    </>
+  )
+}
 
-            
-export default DashBoard4;
+export default DashBoard4

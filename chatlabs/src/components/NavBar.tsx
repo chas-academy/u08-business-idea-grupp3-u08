@@ -1,19 +1,19 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useGoogleLogin } from "@react-oauth/google"
 // import { useGoogleLogin, googleLogout } from "@react-oauth/google";
-import axios from "axios";
+import axios from "axios"
 
 function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   // const [isUserOpen, setIsUserOpen] = useState(false);
-  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
-  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
-  const [userName, setuserName] = useState(localStorage.getItem("name"));
-  const [userId, setuserId] = useState(localStorage.getItem("userid"));
+  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"))
+  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"))
+  const [userName, setuserName] = useState(localStorage.getItem("name"))
+  const [userId, setuserId] = useState(localStorage.getItem("userid"))
 
   function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen)
   }
 
   async function AddEmailToDB(data: any, subData: any) {
@@ -23,12 +23,12 @@ function NavBar() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: data, sub: subData }),
-    });
-    return response.json();
+    })
+    return response.json()
   }
 
   async function getUserId(sub: string) {
-    let data;
+    let data
 
     try {
       const response = await fetch(`http://localhost:4000/getid/${sub}`, {
@@ -36,15 +36,15 @@ function NavBar() {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
 
-      data = await response.json();
+      data = await response.json()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
 
     if (data && data.userId) {
-      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("userId", data.userId)
     }
   }
 
@@ -58,31 +58,34 @@ function NavBar() {
               Authorization: `Bearer ${response.access_token}`,
             },
           }
-        );
-        console.log(info);
-        AddEmailToDB(info.data.email, info.data.sub);
-        getUserId(info.data.sub);
-        localStorage.setItem("avatar", info.data.picture);
-        localStorage.setItem("email", info.data.email);
-        localStorage.setItem("name", info.data.given_name);
-        setuserId(localStorage.getItem("userid"));
-        setuserAvatar(localStorage.getItem("avatar"));
-        setuserEmail(localStorage.getItem("email"));
-        setuserName(localStorage.getItem("name"));
+        )
+        console.log(info)
+        AddEmailToDB(info.data.email, info.data.sub)
+        getUserId(info.data.sub)
+        localStorage.setItem("avatar", info.data.picture)
+        localStorage.setItem("email", info.data.email)
+        localStorage.setItem("name", info.data.given_name)
+        setuserId(localStorage.getItem("userid"))
+        setuserAvatar(localStorage.getItem("avatar"))
+        setuserEmail(localStorage.getItem("email"))
+        setuserName(localStorage.getItem("name"))
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     },
-  });
+  })
 
   const handleLoginClick: React.MouseEventHandler<HTMLButtonElement> = () => {
-    login();
-  };
+    login()
+  }
+
+  const navigate = useNavigate()
 
   const logOut = () => {
-    localStorage.clear();
-    location.reload();
-  };
+    localStorage.clear()
+    navigate("/")
+    location.reload()
+  }
 
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -169,7 +172,7 @@ function NavBar() {
                 </h2>
               </li>
             )}
-            {!userAvatar && (
+            {!userEmail && (
               <li>
                 <button
                   onClick={handleLoginClick}
@@ -227,7 +230,7 @@ function NavBar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar
