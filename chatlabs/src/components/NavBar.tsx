@@ -10,7 +10,7 @@ function NavBar() {
   const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"))
   const [userEmail, setuserEmail] = useState(localStorage.getItem("email"))
   const [userName, setuserName] = useState(localStorage.getItem("name"))
-  const [userId, setuserId] = useState(localStorage.getItem("userid"))
+  const [userId, setuserId] = useState(localStorage.getItem("userId"))
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen)
@@ -150,7 +150,7 @@ function NavBar() {
                 Docs
               </Link>
             </li>
-            {userId && userEmail && (
+            {userId && (
               <li>
                 <Link
                   to="/dashboard"
