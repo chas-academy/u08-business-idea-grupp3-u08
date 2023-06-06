@@ -7,6 +7,8 @@ const app = express()
 const { create, readAll, read, update, deleteChar } = require("./userCRUD")
 const User = require("./userSchema")
 const axios = require('axios');
+const CLIENT_ID = "252e6c426cbfb2206b35"
+const CLIENT_SECRET = "39793dc9261976717bc7ebc2ebf997ffe3099dbf"
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args))
 const bodyparser = require("body-parser")
