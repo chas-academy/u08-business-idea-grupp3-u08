@@ -32,7 +32,7 @@ function ChatPrompt({ index }) {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/prompt/${localStorage.getItem(
+        `https://chatlabs.up.railway.app/prompt/${localStorage.getItem(
           "userId"
         )}/${index}`,
         {

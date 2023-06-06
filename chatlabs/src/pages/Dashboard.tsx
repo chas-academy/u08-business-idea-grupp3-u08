@@ -8,7 +8,7 @@ function Dashboard() {
     const confirmDelete = window.confirm("Delete character?") // Val att fortsätta eller avbryta
     if (confirmDelete) {
       const response = await fetch(
-        `http://localhost:4000/delete/${localStorage.getItem(
+        `https://chatlabs.up.railway.app/delete/${localStorage.getItem(
           "userId"
         )}/${index}`,
         { method: "delete" }
@@ -25,7 +25,11 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:4000/characters/${localStorage.getItem("userId")}`)
+    fetch(
+      `https://chatlabs.up.railway.app/characters/${localStorage.getItem(
+        "userId"
+      )}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
