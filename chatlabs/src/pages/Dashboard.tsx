@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Dashboard() {
   const [userData, setUserData] = useState<any[]>([])
+  const navigate = useNavigate()
 
   const deleteCharacter = async (index: number) => {
     const confirmDelete = window.confirm("Delete character?") // Val att fortsätta eller avbryta
@@ -17,7 +18,7 @@ function Dashboard() {
       console.log(res)
       console.log("Character successfully deleted")
       // Rerender
-      window.location.reload()
+      navigate("/dashboard")
     } else {
       // Avbryt
       alert("Character not deleted")
