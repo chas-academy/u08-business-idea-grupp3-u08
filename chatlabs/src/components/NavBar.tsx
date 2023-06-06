@@ -47,6 +47,7 @@ function NavBar() {
     }
 
     if (data && data.userId) {
+      setuserId(data.userId)
       localStorage.setItem("userId", data.userId)
     }
   }
