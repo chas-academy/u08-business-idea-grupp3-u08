@@ -68,7 +68,7 @@ function NavBar() {
         localStorage.setItem("avatar", info.data.picture)
         localStorage.setItem("email", info.data.email)
         localStorage.setItem("name", info.data.given_name)
-        setuserId(localStorage.getItem("userid"))
+        setuserId(localStorage.getItem("userId"))
         setuserAvatar(localStorage.getItem("avatar"))
         setuserEmail(localStorage.getItem("email"))
         setuserName(localStorage.getItem("name"))
