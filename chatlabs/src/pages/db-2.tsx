@@ -52,7 +52,7 @@ const Dashboard2: React.FC = () => {
   }
 
   const handleBackstoryChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
     setBackstory(event.target.value)
   }
