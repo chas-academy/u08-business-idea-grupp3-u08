@@ -35,15 +35,12 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
     event.preventDefault()
 
     const trimmedTraits = traits.trim()
-
-    // Check if traits are comma-separated or a single word without spaces
     const traitsArray = trimmedTraits.split(",").map((trait) => trait.trim())
     const isValidTraits = traitsArray.every(
       (trait) => trait !== "" && !trait.includes(" ")
     )
 
     if (!isValidTraits) {
-      // Traits are not comma-separated and not a single word without spaces, return early without submitting
       setIsSubmitted(true)
       return
     }
