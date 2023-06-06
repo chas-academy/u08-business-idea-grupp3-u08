@@ -16,7 +16,7 @@ function Dashboard() {
     console.log(res)
     console.log("Character successfully deleted")
     // Rerender
-    navigate("/dashboard")
+    navigate("/dashboard#")
   }
 
   useEffect(() => {
