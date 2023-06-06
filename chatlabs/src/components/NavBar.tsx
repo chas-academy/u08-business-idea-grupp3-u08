@@ -175,7 +175,7 @@ function NavBar() {
                 </h2>
               </li>
             )}
-            {!userEmail && (
+            {!userId && (
               <li>
                 <button
                   onClick={handleLoginClick}
@@ -193,7 +193,7 @@ function NavBar() {
                 </button>
               </li>
             )}
-            {userEmail && (
+            {userId && (
               <li>
                 <button
                   onClick={logOut}
