@@ -85,8 +85,8 @@ function NavBar() {
   const navigate = useNavigate()
 
   const logOut = () => {
-    localStorage.clear()
     navigate("/")
+    localStorage.clear()
     location.reload()
   }
 
