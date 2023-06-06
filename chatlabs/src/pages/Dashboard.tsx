@@ -6,23 +6,17 @@ function Dashboard() {
   const navigate = useNavigate()
 
   const deleteCharacter = async (index: number) => {
-    const confirmDelete = window.confirm("Delete character?") // Val att fortsätta eller avbryta
-    if (confirmDelete) {
-      const response = await fetch(
-        `https://chatlabs.up.railway.app/delete/${localStorage.getItem(
-          "userId"
-        )}/${index}`,
-        { method: "delete" }
-      )
-      const res = await response.json()
-      console.log(res)
-      console.log("Character successfully deleted")
-      // Rerender
-      navigate("/dashboard")
-    } else {
-      // Avbryt
-      alert("Character not deleted")
-    }
+    const response = await fetch(
+      `https://chatlabs.up.railway.app/delete/${localStorage.getItem(
+        "userId"
+      )}/${index}`,
+      { method: "delete" }
+    )
+    const res = await response.json()
+    console.log(res)
+    console.log("Character successfully deleted")
+    // Rerender
+    navigate("/dashboard")
   }
 
   useEffect(() => {
