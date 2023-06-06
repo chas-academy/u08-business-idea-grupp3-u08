@@ -150,7 +150,7 @@ function NavBar() {
                 Docs
               </Link>
             </li>
-            {userId && (
+            {userId && userEmail && (
               <li>
                 <Link
                   to="/dashboard"
