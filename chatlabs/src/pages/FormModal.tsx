@@ -57,7 +57,7 @@ function FormModal({
         }),
       }
     )
-    navigate(0)
+    navigate("/dashboard4")
   }
 
   const navigate = useNavigate()
