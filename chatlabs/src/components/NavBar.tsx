@@ -150,7 +150,7 @@ function NavBar() {
                 Docs
               </Link>
             </li>
-            {userEmail && (
+            {userId && (
               <li>
                 <Link
                   to="/dashboard"
@@ -161,7 +161,7 @@ function NavBar() {
               </li>
             )}
             <li></li>
-            {userAvatar && (
+            {userId && (
               <li>
                 <h2 className="block py-2 pl-3 pr-4 text-white rounded">
                   <img
