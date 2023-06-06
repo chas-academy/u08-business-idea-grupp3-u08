@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function Dashboard() {
   const [userData, setUserData] = useState<any[]>([])
-  const navigate = useNavigate()
+  const [rerenderFlag, setRerenderFlag] = useState(false)
 
   const deleteCharacter = async (index: number) => {
     const response = await fetch(
@@ -16,7 +16,7 @@ function Dashboard() {
     console.log(res)
     console.log("Character successfully deleted")
     // Rerender
-    navigate("/dashboard#")
+    setRerenderFlag((prevFlag) => !prevFlag)
   }
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function Dashboard() {
         console.log(data)
         setUserData(data.characters)
       })
-  }, [])
+  }, [rerenderFlag])
 
   return (
     <>
