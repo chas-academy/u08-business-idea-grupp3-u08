@@ -27,6 +27,7 @@ function ChatPrompt({ index }: { index: number }) {
     }
 
     setIsChatting(true)
+    submittedPrompt
     setSubmittedPrompt(prompt)
     const newPrompt = prompt
 
