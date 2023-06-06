@@ -1,7 +1,7 @@
 import axios from "axios"
 import { ChangeEvent, useEffect, useState } from "react"
 
-function ChatPrompt({ index }) {
+function ChatPrompt({ index }: { index: number }) {
   const [prompt, setPrompt] = useState("")
   const [submittedPrompt, setSubmittedPrompt] = useState("")
   const [submittedPromptArray, setSubmittedPromptArray] = useState<
