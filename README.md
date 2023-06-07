@@ -48,11 +48,12 @@ Projektet består av följande kodbaser/komponenter
 
 ### 1. **Frontend**:
 
-* Beskrivning: Ansvarar för  user interface och client-side functionality, funktionalitet, vilket ger en intuitiv och interaktiv upplevelse för användarna.
-* Tekniker/bibliotek: React, HTML, CSS, JavaScript, etc.
-* Struktur:
-    * chatlabs/: huvudmappen
-        * src/: Innehåller huvudkällkodsfilerna.
+* Description: The frontend codebase is responsible for the user interface and client-side functionality.
+* Technologies/Libraries Used: React, HTML, CSS (Tailwind), JavaScript, etc.
+* Directory Structure:
+    * chatlabs/: main map for frontend
+        * .env:
+        * src/: contains source code
              * components/: 
                  * CharacterForm.tsx:
                  * ChatPrompt.tsx:
@@ -66,7 +67,7 @@ Projektet består av följande kodbaser/komponenter
                  * db-4.tsx:
                  * FormModal.tsx:
             * App.tsx:
-            * index.css: 
+            * index.css:
             * main.tsx :
 
               
@@ -74,13 +75,43 @@ Projektet består av följande kodbaser/komponenter
 
 ### 2. **Backend**:
 
-* Beskrivning: Hanterar logik på serversidan, databehandling och interagerar med databaser eller externa API:er
-* Tekniker/bibliotek: Node.js, Express, MongoDB/Mongoose, etc.
-* Struktur:
-    *  backend/: huvudmappen.
-        * app.js:
-        * userCRUD.js
-        * userSchema.js
+* Beskrivning: Handles server-side logic and interacts with databases or external APIs.
+* Technologies/Libraries Used: Node.js, Express, MongoDB/Mongoose, etc.
+* Directory Structure:
+    *  backend/: main map for backend. 
+        * **'.env'**: contains environment variables used in the application. Let's break down the variables:
+            * **'NODE_ENV'**: Specifies the environment mode, usually set to development in this case.
+            * **'PORT'**: Specifies the port on which the server will listen for incoming requests, set to 4000.
+            * **'OPENAI_API_KEY'**: API key for OpenAI GPT-3.5 Turbo model, used for generating responses.
+            * **'ELEVENLABS_KEY'**: API key for Eleven Labs text-to-speech API, used for converting text to audio.
+
+        * **'app.js'**: the entry point of the application and sets up the Express server:
+
+            * Importing necessary packages such as express, cors, fs, mongoose, axios, and body-parser.
+
+            *  Using dotenv package to load environment variables from the **.env** file.
+
+            * Configuring middleware for request handling, including cors to enable cross-origin resource sharing, and body-parser to parse JSON and URL-encoded data.
+
+            * Establishing a connection to the MongoDB database using the mongoose package.
+
+            * Routes setup: Defining various routes using app.put(), app.delete(), app.post(), and app.get() methods. These routes handle different CRUD operations for the user characters.
+
+            
+        * **'userCRUD.js'**: Exports functions for performing CRUD operations on user characters. Here's a breakdown of the functions:
+
+             * **'create'**: Creates a new user character by saving it to the database.
+            * **'readAll'**: Retrieves all user characters from the database.
+            * **'read'**: Retrieves a specific user character based on the provided id.
+
+        * **userSchema.js**: Defines the Mongoose schema for the user and character objects. Here's a breakdown of the schema:
+            * **'email'**: String field representing the email of the user. It is required.
+            * **'sub'**: String field representing a subject, not required.
+            * **'Characters'**: An array field containing objects representing user characters. Each character object has the following properties:
+
+            * **'name'**: String field representing the name of the character. It is required.
+            * **'backstory'**: String field representing the backstory of the character. It is required.
+            * **'traits'**: String field representing the traits of the character. It is required.
 
 # Användning
 
