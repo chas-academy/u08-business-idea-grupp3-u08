@@ -87,7 +87,7 @@ Projektet består av följande kodbaser/komponenter
 * Technologies/Libraries Used: Node.js, Express, MongoDB/Mongoose, etc.
 * Directory Structure:
     *  backend/: main map for backend. 
-        * **'.env'**: contains environment variables used in the application. Let's break down the variables:
+        * **'.env'**: contains environment variables used in the application:
             * **'NODE_ENV'**: Specifies the environment mode, usually set to development in this case.
             * **'PORT'**: Specifies the port on which the server will listen for incoming requests, set to 4000.
             * **'OPENAI_API_KEY'**: API key for OpenAI GPT-3.5 Turbo model, used for generating responses.
