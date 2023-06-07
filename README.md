@@ -135,3 +135,6 @@ https://github.com/Camgus89
 https://www.linkedin.com/in/camilla-gustafsson-1951aa136/
 
 # Licens
+
+MIT LICENSE:
+https://github.com/zamero/u08-business-idea-grupp3-u08/blob/main/LICENSE
