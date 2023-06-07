@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
-  const [userData, setUserData] = useState<any[]>([])
-  const [rerenderFlag, setRerenderFlag] = useState(false)
+  const [userData, setUserData] = useState<any[]>([]);
+  const [rerenderFlag, setRerenderFlag] = useState(false);
 
   const deleteCharacter = async (index: number) => {
     const response = await fetch(
@@ -11,13 +11,13 @@ function Dashboard() {
         "userId"
       )}/${index}`,
       { method: "delete" }
-    )
-    const res = await response.json()
-    console.log(res)
-    console.log("Character successfully deleted")
+    );
+    const res = await response.json();
+    console.log(res);
+    console.log("Character successfully deleted");
     // Rerender
-    setRerenderFlag((prevFlag) => !prevFlag)
-  }
+    setRerenderFlag((prevFlag) => !prevFlag);
+  };
 
   useEffect(() => {
     fetch(
@@ -27,10 +27,10 @@ function Dashboard() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        setUserData(data.characters)
-      })
-  }, [rerenderFlag])
+        console.log(data);
+        setUserData(data.characters);
+      });
+  }, [rerenderFlag]);
 
   return (
     <>
@@ -46,16 +46,16 @@ function Dashboard() {
             {userData &&
               userData.map((character: any, index: number) => {
                 const truncateText = (text: string, limit: number) => {
-                  const words = text.split(" ")
+                  const words = text.split(" ");
                   if (words.length > limit) {
-                    return words.slice(0, limit).join(" ") + "..."
+                    return words.slice(0, limit).join(" ") + "...";
                   }
-                  return text
-                }
+                  return text;
+                };
 
                 return (
                   <>
-                    <Link to="/dashboard4" state={{ index: `${index}` }}>
+                    <Link to="/character" state={{ index: `${index}` }}>
                       <div className="grid grid-cols-1 gap-4 p-1 my-2 rounded-xl shadow-lg hover:shadow-violet-500/40 transition duration-300">
                         <div
                           className="grid grid-cols-8 gap-6 bg-neutral-950 text-neutral-100 py-2 px-4 rounded-md"
@@ -123,8 +123,8 @@ function Dashboard() {
                             <div className="grid grid-cols-1 gap-2">
                               <button
                                 onClick={(event) => {
-                                  deleteCharacter(index)
-                                  event.preventDefault()
+                                  deleteCharacter(index);
+                                  event.preventDefault();
                                 }}
                                 className="px-2 bg-violet-700 rounded-md p-1 m-1 hover:opacity-70"
                               >
@@ -149,12 +149,12 @@ function Dashboard() {
                       </div>
                     </Link>
                   </>
-                )
+                );
               })}
           </>
 
           <div className="flex flex-col p-2 my-12 md:w-72 border-l-4 border-violet-500">
-            <Link to="/dashboard2">
+            <Link to="/create">
               <button
                 role="button"
                 className="bg-violet-600 hover:bg-violet-500 rounded-md py-2 px-4 font-semibold text-slate-100 uppercase cursor-pointer"
@@ -166,6 +166,6 @@ function Dashboard() {
         </div>
       </section>
     </>
-  )
+  );
 }
-export default Dashboard
+export default Dashboard;
