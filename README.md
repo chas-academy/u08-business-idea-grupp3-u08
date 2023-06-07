@@ -101,6 +101,37 @@ Happy developing!
 
 # Dokumentation
 
+Daily-Scrums:
+https://docs.google.com/document/d/1LMuhqvmej-LUDXtamVxOSvMyaCqgHevOQF9dOItwGDQ
+
+Mongoose Schema:
+https://cdn.discordapp.com/attachments/1103323453068673124/1105118330131599380/ER-diagram-v2.png
+
+Figma initial sketch:
+https://www.figma.com/file/r8tbrfqE1j1VS8NlltcdzL/The-AI-Artist?type=design&node-id=0-1&t=Xlo4QOVlnC3OZNYj-0
+
 # Bidragarna
+
+Samer Essam
+https://github.com/zamero
+https://www.linkedin.com/in/samer-essam-9908b41a2/
+
+Ghanemla lamloumi
+https://github.com/Ghanemla
+
+Isabelle Johannesson
+https://github.com/isabellejohannesson
+https://www.linkedin.com/in/isabellejohannesson
+
+Sandra Rehnström
+https://www.linkedin.com/in/sandra-rehnstr%C3%B6m-54a547188/
+
+Nejirwan Ramadan
+https://github.com/NRiCe31
+https://www.linkedin.com/in/nejirwan-ramadan/
+
+Camilla Gustafsson
+https://github.com/Camgus89
+https://www.linkedin.com/in/camilla-gustafsson-1951aa136/
 
 # Licens
