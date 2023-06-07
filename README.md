@@ -145,6 +145,9 @@ https://cdn.discordapp.com/attachments/1103323453068673124/1105118330131599380/E
 Figma initial sketch:
 https://www.figma.com/file/r8tbrfqE1j1VS8NlltcdzL/The-AI-Artist?type=design&node-id=0-1&t=Xlo4QOVlnC3OZNYj-0
 
+Resultatbudget:  
+https://1drv.ms/p/s!Am9WBrUaT7Tpgd9bhUnvvUoT6d4aVQ?e=zUewSg
+
 # Bidragarna
 
 Samer Essam
