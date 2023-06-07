@@ -106,13 +106,13 @@ Projektet består av följande kodbaser/komponenter
             * Routes setup: Defining various routes using app.put(), app.delete(), app.post(), and app.get() methods. These routes handle different CRUD operations for the user characters.
 
             
-        * **'userCRUD.js'**: Exports functions for performing CRUD operations on user characters. Here's a breakdown of the functions:
+        * **'userCRUD.js'**: Exports functions for performing CRUD operations on user characters:
 
              * **'create'**: Creates a new user character by saving it to the database.
             * **'readAll'**: Retrieves all user characters from the database.
             * **'read'**: Retrieves a specific user character based on the provided id.
 
-        * **userSchema.js**: Defines the Mongoose schema for the user and character objects. Here's a breakdown of the schema:
+        * **userSchema.js**: Defines the Mongoose schema for the user and character objects:
             * **'email'**: String field representing the email of the user. It is required.
             * **'sub'**: String field representing a subject, not required.
             * **'Characters'**: An array field containing objects representing user characters. Each character object has the following properties:
