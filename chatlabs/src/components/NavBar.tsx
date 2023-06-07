@@ -1,50 +1,54 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useGoogleLogin} from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useGoogleLogin } from "@react-oauth/google"
 // import { useGoogleLogin, googleLogout } from "@react-oauth/google";
-import axios from "axios";
+import axios from "axios"
 
 function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   // const [isUserOpen, setIsUserOpen] = useState(false);
-  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"));
-  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"));
-  const [userName, setuserName] = useState(localStorage.getItem("name"));
-  const [userId, setuserId] = useState(localStorage.getItem("userid"));
+  const [userAvatar, setuserAvatar] = useState(localStorage.getItem("avatar"))
+  const [userEmail, setuserEmail] = useState(localStorage.getItem("email"))
+  const [userName, setuserName] = useState(localStorage.getItem("name"))
+  const [userId, setuserId] = useState(localStorage.getItem("userId"))
 
   function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen)
   }
 
-  async function AddEmailToDB(data: any, subData:any) {
-    const response = await fetch("http://localhost:4000/createuser", {
+  async function AddEmailToDB(data: any, subData: any) {
+    const response = await fetch("https://chatlabs.up.railway.app/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data, sub: subData}),
-    });
-    return response.json();
+      body: JSON.stringify({ email: data, sub: subData }),
+    })
+    return response.json()
   }
 
   async function getUserId(sub: string) {
-    let data;
-  
+    let data
+
     try {
-      const response = await fetch(`http://localhost:4000/getid/${sub}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      data = await response.json();
+      const response = await fetch(
+        `https://chatlabs.up.railway.app/getid/${sub}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+
+      data = await response.json()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
 
     if (data && data.userId) {
-      localStorage.setItem("userId", data.userId);
+      setuserId(data.userId)
+      localStorage.setItem("userId", data.userId)
     }
   }
 
@@ -58,26 +62,34 @@ function NavBar() {
               Authorization: `Bearer ${response.access_token}`,
             },
           }
-        );
-        console.log(info);
-        AddEmailToDB(info.data.email, info.data.sub);
+        )
+        console.log(info)
+        AddEmailToDB(info.data.email, info.data.sub)
         getUserId(info.data.sub)
-        localStorage.setItem("avatar", info.data.picture);
-        localStorage.setItem("email", info.data.email);
-        localStorage.setItem("name", info.data.given_name);
-        setuserId(localStorage.getItem("userid"))
-        setuserAvatar(localStorage.getItem("avatar"));
-        setuserEmail(localStorage.getItem("email"));
-        setuserName(localStorage.getItem("name"));
+        localStorage.setItem("avatar", info.data.picture)
+        localStorage.setItem("email", info.data.email)
+        localStorage.setItem("name", info.data.given_name)
+        setuserId(localStorage.getItem("userId"))
+        setuserAvatar(localStorage.getItem("avatar"))
+        setuserEmail(localStorage.getItem("email"))
+        setuserName(localStorage.getItem("name"))
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     },
-  });
+  })
 
   const handleLoginClick: React.MouseEventHandler<HTMLButtonElement> = () => {
-    login();
-  };
+    login()
+  }
+
+  const navigate = useNavigate()
+
+  const logOut = () => {
+    navigate("/")
+    localStorage.clear()
+    location.reload()
+  }
 
   return (
     <nav className="p-3 border-gray-200 bg-neutral-900">
@@ -139,14 +151,16 @@ function NavBar() {
                 Docs
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard"
-                className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
-              >
-                Dashboard
-              </Link>
-            </li>
+            {userId && (
+              <li>
+                <Link
+                  to="/dashboard"
+                  className="block py-2 pl-3 pr-4 text-white rounded hover:text-violet-500"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
             <li></li>
             {userAvatar && (
               <li>
@@ -162,7 +176,7 @@ function NavBar() {
                 </h2>
               </li>
             )}
-            {!userAvatar && (
+            {!userEmail && (
               <li>
                 <button
                   onClick={handleLoginClick}
@@ -177,6 +191,16 @@ function NavBar() {
                   >
                     <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
                   </svg>
+                </button>
+              </li>
+            )}
+            {userEmail && (
+              <li>
+                <button
+                  onClick={logOut}
+                  className="text-white flex items-center bg-violet-700 hover:bg-violet-600 rounded ml-3 p-1.5"
+                >
+                  Log out
                 </button>
               </li>
             )}
@@ -210,7 +234,7 @@ function NavBar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar

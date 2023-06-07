@@ -1,7 +1,7 @@
 import axios from "axios"
 import { ChangeEvent, useEffect, useState } from "react"
 
-function ChatPrompt({ index }) {
+function ChatPrompt({ index }: { index: number }) {
   const [prompt, setPrompt] = useState("")
   const [submittedPrompt, setSubmittedPrompt] = useState("")
   const [submittedPromptArray, setSubmittedPromptArray] = useState<
@@ -27,12 +27,13 @@ function ChatPrompt({ index }) {
     }
 
     setIsChatting(true)
+    submittedPrompt
     setSubmittedPrompt(prompt)
     const newPrompt = prompt
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/prompt/${localStorage.getItem(
+        `https://chatlabs.up.railway.app/prompt/${localStorage.getItem(
           "userId"
         )}/${index}`,
         {

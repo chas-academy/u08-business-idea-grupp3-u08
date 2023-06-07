@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom"
-import { useParams, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useParams, useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import {
   TrashIcon,
@@ -9,6 +8,7 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/solid"
 import ChatPrompt from "../components/ChatPrompt"
+import FormModal from "./FormModal"
 
 function DashBoard4() {
   const handleGoBack = () => {
@@ -18,7 +18,7 @@ function DashBoard4() {
   const { id } = useParams()
   const [character, setCharacter] = useState<{
     name: string
-    traits:string
+    traits: string
     backstory: string
   } | null>(null)
   const location = useLocation()
@@ -30,9 +30,9 @@ function DashBoard4() {
       try {
         console.log(`Fetching character with: `)
         const response = await axios.get(
-          `http://localhost:4000/getone/${localStorage.getItem("userId")}/${
-            location.state.index
-          }`
+          `https://chatlabs.up.railway.app/getone/${localStorage.getItem(
+            "userId"
+          )}/${location.state.index}`
         )
         console.log("Response:", response.data.character)
         console.log(response.data)
@@ -47,32 +47,18 @@ function DashBoard4() {
     }
 
     fetchCharacter()
-  }, [id])
-
-  async function updateCharacter(index: number) {
-    await fetch(
-      `http://localhost:4000/edit/${localStorage.getItem("userId")}/${index}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "Tom",
-          backstory: "His family was murderd",
-          traits: "Angry killer",
-        }),
-      }
-    )
-  }
+  }, [id, location.state.index])
 
   const deleteCharacter = async (index: number) => {
     const response = await fetch(
-      `http://localhost:4000/delete/${localStorage.getItem("userId")}/${index}`,
+      `https://chatlabs.up.railway.app/delete/${localStorage.getItem(
+        "userId"
+      )}/${index}`,
       { method: "delete" }
     )
     const res = await response.json()
     console.log(res)
+    navigate("/dashboard")
   }
 
   if (!character) {
@@ -113,18 +99,23 @@ function DashBoard4() {
         </div>
       </section>
 
-     {/*Card */}
-     <div className="container mx-auto px-4 py-10">
-        <div className="bg-black rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
+      {/*Card */}
+      <div className="container mx-auto px-4 py-10">
+        <div className="bg-neutral-950 rounded-lg shadow-lg card shadow-violet-500/100 outline outline-offset-2 outline-violet-950">
           <div className="p-5">
             <h1 className="mb-4 text-2xl font-semibold text-center uppercase text-violet-500">
               {character.name}
             </h1>
             <div className="mb-4">
-              <h2 className=" mb-2 text-lg font-medium uppercase text-violet-500">Traits:</h2>
+              <h2 className=" mb-2 text-lg font-medium uppercase text-violet-500">
+                Traits:
+              </h2>
               <div className=" flex flex-wrap">
-                {character.traits.split(',').map((trait, index) => (
-                  <span key={index} className="zoom-in-trait flex items-center p-1 mb-2 mr-3 text-sm font-semibold text-white rounded-full bg-violet-700">
+                {character.traits.split(",").map((trait, index) => (
+                  <span
+                    key={index}
+                    className="zoom-in-trait flex items-center py-2 px-3 m-1 text-sm font-semibold text-white rounded-full bg-violet-700"
+                  >
                     <ExclamationCircleIcon className="w-4 h-4 mr-1 text-white" />
                     <p className="text-white">{trait.trim()}</p>
                   </span>
@@ -132,31 +123,41 @@ function DashBoard4() {
               </div>
             </div>
             <div>
-              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">Backstory:</h2>
+              <h2 className="mb-2 text-lg font-medium uppercase text-violet-500">
+                Backstory:
+              </h2>
               <p className="text-white">{character.backstory}</p>
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between p-5">
-            <button onClick={handleGoBack} className="flex items-center justify-center px-4 py-2 font-bold text-white rounded-lg bg-violet-700">
-              <ArrowLeftIcon className="w-5 h-5 mr-1" />
-              
-            </button>
-            <div>
-              <button onClick={() => setShowForm(!showForm)} className="flex items-center justify-center px-4 py-2 mr-2 font-semibold text-white rounded-lg bg-violet-700">
-                <PencilIcon className="w-5 h-5 mr-1" />
-                
+          <div className="flex flex-row justify-between p-5">
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={handleGoBack}
+                className="flex items-center justify-center py-2 px-5 font-bold text-white rounded-lg bg-violet-700"
+              >
+                <ArrowLeftIcon className="w-5" />
+              </button>
+            </div>
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
+              >
+                <PencilIcon className="w-5" />
               </button>
 
-              <button onClick={() => deleteCharacter()} className="flex items-center justify-center px-4 py-2 font-semibold text-white rounded-lg bg-violet-700">
-                <TrashIcon className="w-5 h-5 mr-1" />
-                
+              <button
+                onClick={() => deleteCharacter(location.state.index)}
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
+              >
+                <TrashIcon className="w-5" />
               </button>
-              
+
               <button
                 onClick={() => setShowChat(!showChat)}
-                className="px-4 py-2  bg-violet-700 text-white rounded-lg"
+                className="px-4 py-2  bg-violet-700 text-white rounded-lg mr-1"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -169,70 +170,12 @@ function DashBoard4() {
                   <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                 </svg>
               </button>
-
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="flex justify-center mt-10 pt-10 mb-10">
-        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl shadow-lg shadow-violet-500/50 hover:shadow-violet-500/100 transition duration-300">
-          {showForm && (
-            <form className=" bg-black rounded-xl shadow-lg p-10">
-              <h2 className="text-xl text-violet-500 font-semibold mb-20 mt-8 uppercase text-center">
-                Edit Character
-              </h2>
-
-              {/* Input fält start*/}
-              <div className="mb-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Name
-                </label>
-                <input
-                  className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="username"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Backstory
-                </label>
-                <input
-                  className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-20"
-                  id="username"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Traits
-                </label>
-                <input
-                  className="bg-black shadow appearance-none border-b rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-20"
-                  id="username"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-              {/* Input fält Stop*/}
-
-              {/* button start */}
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={() => updateCharacter()}
-                  className="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-10"
-                  type="button"
-                >
-                  EDIT
-                </button>
-              </div>
-              {/* button end */}
-            </form>
-          )}
-        </div>
+        {showForm && (
+          <FormModal data={location.state.index} closeFormModal={setShowForm} />
+        )}
       </div>
     </>
   )

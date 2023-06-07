@@ -1,57 +1,67 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer';
-import CharacterForm, { CharacterFormData } from '../components/CharacterForm';
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Footer from "../components/Footer"
+import CharacterForm, { CharacterFormData } from "../components/CharacterForm"
 
 const Dashboard2: React.FC = () => {
-  const [response, setResponse] = useState('');
-  const [name, setName] = useState('');
-  const [backstory, setBackstory] = useState('');
-  const [traits, setTraits] = useState('');
+  const [response, setResponse] = useState("")
+  const [name, setName] = useState("")
+  const [backstory, setBackstory] = useState("")
+  const [traits, setTraits] = useState("")
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSubmit = async (formData: CharacterFormData): Promise<void> => {
     try {
-      const { name, backstory, traits } = formData;
-      const response = await fetch(`http://localhost:4000/create/${localStorage.getItem("userId")}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          backstory,
-          traits,
-        }),
-      });
+      const { name, backstory, traits } = formData
+      const response = await fetch(
+        `https://chatlabs.up.railway.app/create/${localStorage.getItem(
+          "userId"
+        )}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            backstory,
+            traits,
+          }),
+        }
+      )
 
-      const data = await response.json();
-      setResponse(data.message);
+      const data = await response.json()
+      setResponse(data.message)
 
+      setName("")
+      setBackstory("")
+      setTraits("")
 
-      setName('');
-      setBackstory('');
-      setTraits('');
-
-      navigate('/dashboard');
+      navigate("/dashboard")
     } catch (error) {
-      console.error(error);
-      setResponse('An error occurred. Please try again.');
+      console.error(error)
+      setResponse("An error occurred. Please try again.")
     }
-  };
+  }
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setName(event.target.value);
-  };
+  const handleNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setName(event.target.value)
+  }
 
-  const handleBackstoryChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setBackstory(event.target.value);
-  };
+  const handleBackstoryChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    setBackstory(event.target.value)
+  }
 
-  const handleTraitsChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setTraits(event.target.value);
-  };
+  const handleTraitsChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setTraits(event.target.value)
+  }
 
   return (
     <>
@@ -73,7 +83,7 @@ const Dashboard2: React.FC = () => {
       {response && <p>{response}</p>}
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Dashboard2;
+export default Dashboard2

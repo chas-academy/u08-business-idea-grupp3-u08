@@ -7,8 +7,6 @@ const app = express()
 const { create, readAll, read, update, deleteChar } = require("./userCRUD")
 const User = require("./userSchema")
 const axios = require('axios');
-const CLIENT_ID = "252e6c426cbfb2206b35"
-const CLIENT_SECRET = "39793dc9261976717bc7ebc2ebf997ffe3099dbf"
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args))
 const bodyparser = require("body-parser")
@@ -35,7 +33,7 @@ const PORT = 4000;
 // const PORT = process.env.PORT || 4000;
 
 // cors är bra så att vi kan ha server och client isär
-app.use(cors());
+app.use(cors({origin:"*"}));
 // parse json objects
 app.use(express.json());
 // parse url encoded objects- data sent through the url
