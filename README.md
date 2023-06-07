@@ -88,6 +88,17 @@ Projektet består av följande kodbaser/komponenter
 
 # Användning
 
+## Chat NPC is a service for game developers to make AI generated interactive NPC:s for their games.
+
+### Example use case:
+
+You are creating a game set in a world where magicians and humans live along side each other. A dragon is said to threaten the village, and living somewhere in the mountains. You need a character guiding your main character to the mountains and provide them with information. Create that character with Chat NPC! Just write a short backstory, give the NPC a name and personality traits, hit _create_ and there you have it! You can now chat with the character, saying what you want them to say and download the sound file to use in your game.
+
+This is not limited to video games, but can also be used in a more traditional board game context, for example D&D. Just have fun and be creative!
+
+Happy developing!
+/ Chat labs team
+
 # Dokumentation
 
 # Bidragarna
