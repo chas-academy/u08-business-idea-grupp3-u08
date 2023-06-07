@@ -17,19 +17,19 @@
 
 # Installation
 
-För att komma igång med det här projektet, följ stegen nedan:
+To get started with this project, follow the steps below:
 
-Klona repo till dator:
+Clone the repository to your computer:
 git clone https://github.com/zamero/u08-business-idea-grupp3-u08
-<br>Navigera till projektkatalogen:
+<br>Navigate to the project directory:
 Bash
 cd chatlabs
 
-Installera frontend-dependencies med npm:
+Install frontend dependencies with npm:
 
 npm install
 
-Installera backend-dependensies med npm:
+Install backend dependencies with npm:
 cd ../backend
 npm install
 Set up MongoDB databas:
