@@ -15,8 +15,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard2" element={<DashBoard2 />} />
-          <Route path="/dashboard4" element={<DashBoard4 />} />
+          <Route path="/create" element={<DashBoard2 />} />
+          <Route path="/character" element={<DashBoard4 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
